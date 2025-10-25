@@ -1,0 +1,192 @@
+/* === General Page Layout === */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* === Left Side === */
+.left {
+  background-color: #73000a;
+  color: white;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-box {
+  background-color: #e5e5e5;
+  padding: 40px;
+  text-align: center;
+  width: 70%;
+  border-radius: 8px;
+}
+
+/* ✅ Larger, responsive logo */
+.logo-box img {
+  width: 100%;        /* base size */
+  max-width: 100%;      /* keeps it responsive */
+  height: auto;        /* maintains proportions */
+  margin-bottom: 15px;
+}
+
+.logo-text {
+  color: #73000a;
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.footer-text {
+  position: absolute;
+  bottom: 15px;
+  color: #ccc;
+  font-size: 12px;
+}
+
+/* === Right Side === */
+.right {
+  background-color: #e5e5e5;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box {
+  background-color: #e5e5e5;
+  padding: 30px 40px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 350px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-box h2 {
+  color: #000;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.login-box form {
+  width: 100%;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+/* === Remember Checkbox === */
+/* === Remember Checkbox === */
+.remember {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;                 /* space between box and label */
+  font-size: 14px;
+  color: #444;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  width: 100%;              /* keeps it full width like inputs */
+  box-sizing: border-box;
+}
+
+.remember input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;                /* remove browser default offsets */
+  flex-shrink: 0;           /* prevent scaling */
+}
+
+.remember label {
+  white-space: nowrap;      /* stop label from wrapping */
+}
+
+
+/* === Login Button === */
+.login-btn {
+  background-color: #73000a;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 16px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.login-btn:hover {
+  background-color: #500007;
+}
+
+/* === Links === */
+.links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.links a {
+  color: #73000a;
+  text-decoration: none;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+/* === Responsive Layout === */
+@media (max-width: 800px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left,
+  .right {
+    flex: none;
+    width: 100%;
+    height: 50vh;
+  }
+
+  .footer-text {
+    position: static;
+    margin-top: 20px;
+  }
+
+  .logo-box img {
+    width: 120px;
+  }
+
+/* === Active Navigation Item === */
+.bottom-nav .nav-item.active {
+  color: #73000a; /* USC Garnet */
+}
+
+.bottom-nav .nav-item.active img {
+  filter: invert(14%) sepia(93%) saturate(3235%) hue-rotate(-10deg) brightness(90%);
+}
+}
+
+/* === Active Navigation Item === */
+.bottom-nav .nav-item.active {
+  color: #73000a; /* USC Garnet */
+}
+
+.bottom-nav .nav-item.active img {
+  filter: invert(14%) sepia(93%) saturate(3235%) hue-rotate(-10deg) brightness(90%);
+}

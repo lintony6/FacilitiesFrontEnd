@@ -1,36 +1,209 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Calendar - University of South Carolina</title>
-  <link rel="stylesheet" href="static/css/style.css">
-</head>
-<body>
-  <div class="calendar-container">
-    <!-- Top Controls -->
-    <div class="top-bar">
+<!DOCTYPE html><!DOCTYPE html>
+
+<html lang="en"><html lang="en">
+
+<head><head>
+
+  <meta charset="utf-8" />  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1" />  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Calendar - University of South Carolina</title>  <title>Calendar - University of South Carolina</title>
+
+  <link rel="stylesheet" href="static/css/themes.css">  <link rel="stylesheet" href="static/css/style.css">
+
+  <link rel="stylesheet" href="static/css/style.css"></head>
+
+</head><body>
+
+<body>  <div class="calendar-container">
+
+  <div class="calendar-container">    <!-- Top Controls -->
+
+    <!-- Top Controls -->    <div class="top-bar">
+
+    <div class="top-bar">      <button class="filter-btn" id="filterToggle">Filters ▾</button>
+
       <button class="filter-btn" id="filterToggle">Filters ▾</button>
 
       <div class="search-section">
-        <button id="clearFiltersBtn" type="button">Clear Filters</button>
-        <input type="text" placeholder="Enter date (yyyymmdd)">
-        <textarea
-          id="aiPrompt"
-          class="ai-prompt"
-          placeholder="Ask the AI:"
-        ></textarea>
-      </div>
+
+      <div class="search-section">        <button id="clearFiltersBtn" type="button">Clear Filters</button>
+
+        <button id="clearFiltersBtn" type="button">Clear Filters</button>        <input type="text" placeholder="Enter date (yyyymmdd)">
+
+        <input type="text" placeholder="Enter date (yyyymmdd)">        <textarea
+
+        <textarea          id="aiPrompt"
+
+          id="aiPrompt"          class="ai-prompt"
+
+          class="ai-prompt"          placeholder="Ask the AI:"
+
+          placeholder="Ask the AI:"        ></textarea>
+
+        ></textarea>      </div>
+
+      </div>    </div>
+
     </div>
 
     <!-- Filter Options -->
-    <div class="filter-options" id="filterOptions">
-      <ul>
-        <li>Priority ▸</li>
-        <li>Phase Status ▸</li>
-        <li>Shop ▸</li>
-        <li>Location ▸</li>
-      </ul>
+
+    <!-- Filter Options -->    <div class="filter-options" id="filterOptions">
+
+    <div class="filter-options" id="filterOptions">      <ul>
+
+      <div class="filter-main-list">        <li>Priority ▸</li>
+
+        <div class="filter-category" data-category="priority">        <li>Phase Status ▸</li>
+
+          <span class="filter-category-name">Priority</span>        <li>Shop ▸</li>
+
+          <span class="filter-arrow">▶</span>        <li>Location ▸</li>
+
+        </div>      </ul>
+
+        <div class="filter-category" data-category="status">    </div>
+
+          <span class="filter-category-name">Phase Status</span>
+
+          <span class="filter-arrow">▶</span>    <!-- Calendar -->
+
+        </div>    <div class="month-nav">
+
+        <div class="filter-category" data-category="shop">      <button>◀ Prev</button>
+
+          <span class="filter-category-name">Shop</span>      <h2>January 2025</h2>
+
+          <span class="filter-arrow">▶</span>      <button>Next ▶</button>
+
+        </div>    </div>
+
+        <div class="filter-category" data-category="building">
+
+          <span class="filter-category-name">Building</span>    <table class="calendar-grid" id="calendarTable">
+
+          <span class="filter-arrow">▶</span>      <thead>
+
+        </div>        <tr>
+
+        <div class="filter-category" data-category="location">          <th>Sunday</th>
+
+          <span class="filter-category-name">Location Code</span>          <th>Monday</th>
+
+          <span class="filter-arrow">▶</span>          <th>Tuesday</th>
+
+        </div>          <th>Wednesday</th>
+
+      </div>          <th>Thursday</th>
+
+          <th>Friday</th>
+
+      <div class="filter-sub-panel" id="filterSubPanel">          <th>Saturday</th>
+
+        <!-- Priority Options -->        </tr>
+
+        <div class="filter-sub-options" data-for="priority">      </thead>
+
+          <h3>Priority</h3>      <tbody>
+
+          <div class="checkbox-group">        <!-- Simple static rows for visual structure -->
+
+            <label><input type="checkbox" name="priority" value="EMERGENCY"> Emergency</label>        <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+
+            <label><input type="checkbox" name="priority" value="URGENT"> Urgent</label>        <tr><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr>
+
+            <label><input type="checkbox" name="priority" value="PROMPT"> Prompt</label>        <tr><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td></tr>
+
+            <label><input type="checkbox" name="priority" value="ROUTINE"> Routine</label>        <tr><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td></tr>
+
+            <label><input type="checkbox" name="priority" value="COORDINATED"> Coordinated</label>        <tr><td>29</td><td>30</td><td>31</td><td></td><td></td><td></td><td></td></tr>
+
+            <label><input type="checkbox" name="priority" value="ADMINISTRATIVE"> Administrative</label>      </tbody>
+
+          </div>    </table>
+
+        </div>
+
+    <button class="summary-btn" id="generateBtn">Generate Summary</button>
+
+        <!-- Status Options -->  </div>
+
+        <div class="filter-sub-options" data-for="status">
+
+          <h3>Phase Status</h3>  <div class="bottom-nav">
+
+          <div class="checkbox-group">    <a href="dashboard.html" class="nav-item"><img src="static/icons/home.png" alt="Dashboard Icon">Dashboard</a>
+
+            <label><input type="checkbox" name="status" value="NEW"> New</label>    <a href="archives.html" class="nav-item"><img src="static/icons/archive.png" alt="Archives Icon">Archives</a>
+
+            <label><input type="checkbox" name="status" value="ASSIGNED"> Assigned</label>    <a href="calendar.html" class="nav-item"><img src="static/icons/calendar.png" alt="Calendar Icon">Calendar</a>
+
+            <label><input type="checkbox" name="status" value="WORK IN PROGRESS"> Work In Progress</label>    <a href="login.html" class="nav-item"><img src="static/icons/logout.png" alt="Logout Icon">Log Out</a>
+
+            <label><input type="checkbox" name="status" value="AWAITING"> Awaiting</label>  </div>
+
+            <label><input type="checkbox" name="status" value="RESCHEDULED"> Rescheduled</label>
+
+            <label><input type="checkbox" name="status" value="WORK DONE"> Work Done</label>  <script src="static/js/script.js"></script>
+
+            <label><input type="checkbox" name="status" value="SHOP DONE"> Shop Done</label></body>
+
+            <label><input type="checkbox" name="status" value="CANCELED"> Canceled</label></html>
+
+          </div>
+        </div>
+
+        <!-- Shop Options -->
+        <div class="filter-sub-options" data-for="shop">
+          <h3>Shop</h3>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="shop" value="CUSTODIAL"> Custodial</label>
+            <label><input type="checkbox" name="shop" value="ELECTRICAL"> Electrical & Lighting</label>
+            <label><input type="checkbox" name="shop" value="ELEVATORS"> Elevators & Escalators</label>
+            <label><input type="checkbox" name="shop" value="CARPENTRY"> Carpentry & Building Repairs</label>
+            <label><input type="checkbox" name="shop" value="GROUNDS"> Grounds</label>
+            <label><input type="checkbox" name="shop" value="ACCESS CONTROL"> Access Control</label>
+            <label><input type="checkbox" name="shop" value="EVENT SUPPORT"> Event Support</label>
+            <label><input type="checkbox" name="shop" value="PEST"> Pest</label>
+            <label><input type="checkbox" name="shop" value="PLUMBING"> Plumbing</label>
+            <label><input type="checkbox" name="shop" value="SIGNAGE"> Signage</label>
+            <label><input type="checkbox" name="shop" value="HVAC"> Temperature/HVAC</label>
+            <label><input type="checkbox" name="shop" value="FURNITURE"> Furniture & Appliances</label>
+          </div>
+        </div>
+
+        <!-- Building Options -->
+        <div class="filter-sub-options" data-for="building">
+          <h3>Building</h3>
+          <input type="text" class="filter-search-input" id="buildingSearch" placeholder="Search buildings...">
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="building" value="001"> 001</label>
+            <label><input type="checkbox" name="building" value="008"> 008</label>
+            <label><input type="checkbox" name="building" value="009"> 009</label>
+            <label><input type="checkbox" name="building" value="010"> 010</label>
+            <label><input type="checkbox" name="building" value="027"> 027</label>
+            <label><input type="checkbox" name="building" value="100"> 100</label>
+            <label><input type="checkbox" name="building" value="157"> 157</label>
+            <label><input type="checkbox" name="building" value="GP_LOT"> GP_LOT</label>
+            <!-- More buildings would be here in production -->
+          </div>
+        </div>
+
+        <!-- Location Options -->
+        <div class="filter-sub-options" data-for="location">
+          <h3>Location Code</h3>
+          <input type="text" class="filter-search-input" id="locationSearch" placeholder="Search location codes...">
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="location" value="001"> 001</label>
+            <label><input type="checkbox" name="location" value="100"> 100</label>
+            <label><input type="checkbox" name="location" value="101"> 101</label>
+            <label><input type="checkbox" name="location" value="200"> 200</label>
+            <!-- More locations would be here in production -->
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Calendar -->
@@ -65,11 +238,20 @@
     <button class="summary-btn" id="generateBtn">Generate Summary</button>
   </div>
 
+  <!-- Bottom Nav -->
   <div class="bottom-nav">
-    <a href="dashboard.html" class="nav-item"><img src="static/icons/home.png" alt="Dashboard Icon">Dashboard</a>
-    <a href="archives.html" class="nav-item"><img src="static/icons/archive.png" alt="Archives Icon">Archives</a>
-    <a href="calendar.html" class="nav-item"><img src="static/icons/calendar.png" alt="Calendar Icon">Calendar</a>
-    <a href="login.html" class="nav-item"><img src="static/icons/logout.png" alt="Logout Icon">Log Out</a>
+    <a href="dashboard.html" class="nav-item">
+      <img src="static/icons/home.png" alt="Dashboard Icon"> Dashboard
+    </a>
+    <a href="archives.html" class="nav-item">
+      <img src="static/icons/archive.png" alt="Archives Icon"> Archives
+    </a>
+    <a href="calendar.html" class="nav-item">
+      <img src="static/icons/calendar.png" alt="Calendar Icon"> Calendar
+    </a>
+    <a href="login.html" class="nav-item">
+      <img src="static/icons/logout.png" alt="Logout Icon"> Log Out
+    </a>
   </div>
 
   <script src="static/js/script.js"></script>

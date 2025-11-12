@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard - University of South Carolina</title>
+  <link rel="stylesheet" href="static/css/themes.css">
   <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
@@ -27,7 +28,26 @@
 
     <div class="analytics" role="region" aria-label="Analytics Overview">
       <h3>Analytics Overview</h3>
-      <div class="chart-placeholder">[ Chart Placeholder: Emergency Tickets This Week ]</div>
+      <div class="emergency-stats">
+        <div class="stat-card">
+          <div class="stat-label">Emergency Tickets Today</div>
+          <div class="stat-date" id="todayDate">
+            <span class="loading-spinner-small">...</span>
+          </div>
+          <div class="stat-value" id="emergencyToday">
+            <span class="loading-spinner">Loading...</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Emergency Tickets This Week</div>
+          <div class="stat-date" id="weekDateRange">
+            <span class="loading-spinner-small">...</span>
+          </div>
+          <div class="stat-value" id="emergencyWeek">
+            <span class="loading-spinner">Loading...</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- AI Chat Section -->

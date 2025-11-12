@@ -1,157 +1,81 @@
-<!DOCTYPE html><!DOCTYPE html>
 
-<html lang="en"><html lang="en">
-
-<head><head>
-
-  <meta charset="utf-8" />  <meta charset="utf-8" />
-
-  <meta name="viewport" content="width=device-width,initial-scale=1" />  <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-  <title>Calendar - University of South Carolina</title>  <title>Calendar - University of South Carolina</title>
-
-  <link rel="stylesheet" href="static/css/themes.css">  <link rel="stylesheet" href="static/css/style.css">
-
-  <link rel="stylesheet" href="static/css/style.css"></head>
-
-</head><body>
-
-<body>  <div class="calendar-container">
-
-  <div class="calendar-container">    <!-- Top Controls -->
-
-    <!-- Top Controls -->    <div class="top-bar">
-
-    <div class="top-bar">      <button class="filter-btn" id="filterToggle">Filters ▾</button>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Calendar - University of South Carolina</title>
+  <link rel="stylesheet" href="static/css/themes.css">
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+  <div class="calendar-container">
+    <!-- Top Controls -->
+    <div class="top-bar">
       <button class="filter-btn" id="filterToggle">Filters ▾</button>
 
       <div class="search-section">
-
-      <div class="search-section">        <button id="clearFiltersBtn" type="button">Clear Filters</button>
-
-        <button id="clearFiltersBtn" type="button">Clear Filters</button>        <input type="text" placeholder="Enter date (yyyymmdd)">
-
-        <input type="text" placeholder="Enter date (yyyymmdd)">        <textarea
-
-        <textarea          id="aiPrompt"
-
-          id="aiPrompt"          class="ai-prompt"
-
-          class="ai-prompt"          placeholder="Ask the AI:"
-
-          placeholder="Ask the AI:"        ></textarea>
-
-        ></textarea>      </div>
-
-      </div>    </div>
-
+        <button id="clearFiltersBtn" type="button">Clear Filters</button>
+        <input type="text" placeholder="Enter date (yyyymmdd)">
+        <textarea
+          id="aiPrompt"
+          class="ai-prompt"
+          placeholder="Ask the AI:"
+        ></textarea>
+      </div>
     </div>
 
     <!-- Filter Options -->
-
-    <!-- Filter Options -->    <div class="filter-options" id="filterOptions">
-
-    <div class="filter-options" id="filterOptions">      <ul>
-
-      <div class="filter-main-list">        <li>Priority ▸</li>
-
-        <div class="filter-category" data-category="priority">        <li>Phase Status ▸</li>
-
-          <span class="filter-category-name">Priority</span>        <li>Shop ▸</li>
-
-          <span class="filter-arrow">▶</span>        <li>Location ▸</li>
-
-        </div>      </ul>
-
-        <div class="filter-category" data-category="status">    </div>
-
+    <div class="filter-options" id="filterOptions">
+      <div class="filter-main-list">
+        <div class="filter-category" data-category="priority">
+          <span class="filter-category-name">Priority</span>
+          <span class="filter-arrow">▶</span>
+        </div>
+        <div class="filter-category" data-category="status">
           <span class="filter-category-name">Phase Status</span>
-
-          <span class="filter-arrow">▶</span>    <!-- Calendar -->
-
-        </div>    <div class="month-nav">
-
-        <div class="filter-category" data-category="shop">      <button>◀ Prev</button>
-
-          <span class="filter-category-name">Shop</span>      <h2>January 2025</h2>
-
-          <span class="filter-arrow">▶</span>      <button>Next ▶</button>
-
-        </div>    </div>
-
+          <span class="filter-arrow">▶</span>
+        </div>
+        <div class="filter-category" data-category="shop">
+          <span class="filter-category-name">Shop</span>
+          <span class="filter-arrow">▶</span>
+        </div>
         <div class="filter-category" data-category="building">
+          <span class="filter-category-name">Building</span>
+          <span class="filter-arrow">▶</span>
+        </div>
+        <div class="filter-category" data-category="location">
+          <span class="filter-category-name">Location Code</span>
+          <span class="filter-arrow">▶</span>
+        </div>
+      </div>
 
-          <span class="filter-category-name">Building</span>    <table class="calendar-grid" id="calendarTable">
-
-          <span class="filter-arrow">▶</span>      <thead>
-
-        </div>        <tr>
-
-        <div class="filter-category" data-category="location">          <th>Sunday</th>
-
-          <span class="filter-category-name">Location Code</span>          <th>Monday</th>
-
-          <span class="filter-arrow">▶</span>          <th>Tuesday</th>
-
-        </div>          <th>Wednesday</th>
-
-      </div>          <th>Thursday</th>
-
-          <th>Friday</th>
-
-      <div class="filter-sub-panel" id="filterSubPanel">          <th>Saturday</th>
-
-        <!-- Priority Options -->        </tr>
-
-        <div class="filter-sub-options" data-for="priority">      </thead>
-
-          <h3>Priority</h3>      <tbody>
-
-          <div class="checkbox-group">        <!-- Simple static rows for visual structure -->
-
-            <label><input type="checkbox" name="priority" value="EMERGENCY"> Emergency</label>        <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
-
-            <label><input type="checkbox" name="priority" value="URGENT"> Urgent</label>        <tr><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr>
-
-            <label><input type="checkbox" name="priority" value="PROMPT"> Prompt</label>        <tr><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td></tr>
-
-            <label><input type="checkbox" name="priority" value="ROUTINE"> Routine</label>        <tr><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td></tr>
-
-            <label><input type="checkbox" name="priority" value="COORDINATED"> Coordinated</label>        <tr><td>29</td><td>30</td><td>31</td><td></td><td></td><td></td><td></td></tr>
-
-            <label><input type="checkbox" name="priority" value="ADMINISTRATIVE"> Administrative</label>      </tbody>
-
-          </div>    </table>
-
+      <div class="filter-sub-panel" id="filterSubPanel">
+        <!-- Priority Options -->
+        <div class="filter-sub-options" data-for="priority">
+          <h3>Priority</h3>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="priority" value="EMERGENCY"> Emergency</label>
+            <label><input type="checkbox" name="priority" value="URGENT"> Urgent</label>
+            <label><input type="checkbox" name="priority" value="PROMPT"> Prompt</label>
+            <label><input type="checkbox" name="priority" value="ROUTINE"> Routine</label>
+            <label><input type="checkbox" name="priority" value="COORDINATED"> Coordinated</label>
+            <label><input type="checkbox" name="priority" value="ADMINISTRATIVE"> Administrative</label>
+          </div>
         </div>
 
-    <button class="summary-btn" id="generateBtn">Generate Summary</button>
-
-        <!-- Status Options -->  </div>
-
+        <!-- Status Options -->
         <div class="filter-sub-options" data-for="status">
-
-          <h3>Phase Status</h3>  <div class="bottom-nav">
-
-          <div class="checkbox-group">    <a href="dashboard.html" class="nav-item"><img src="static/icons/home.png" alt="Dashboard Icon">Dashboard</a>
-
-            <label><input type="checkbox" name="status" value="NEW"> New</label>    <a href="archives.html" class="nav-item"><img src="static/icons/archive.png" alt="Archives Icon">Archives</a>
-
-            <label><input type="checkbox" name="status" value="ASSIGNED"> Assigned</label>    <a href="calendar.html" class="nav-item"><img src="static/icons/calendar.png" alt="Calendar Icon">Calendar</a>
-
-            <label><input type="checkbox" name="status" value="WORK IN PROGRESS"> Work In Progress</label>    <a href="login.html" class="nav-item"><img src="static/icons/logout.png" alt="Logout Icon">Log Out</a>
-
-            <label><input type="checkbox" name="status" value="AWAITING"> Awaiting</label>  </div>
-
+          <h3>Phase Status</h3>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="status" value="NEW"> New</label>
+            <label><input type="checkbox" name="status" value="ASSIGNED"> Assigned</label>
+            <label><input type="checkbox" name="status" value="WORK IN PROGRESS"> Work In Progress</label>
+            <label><input type="checkbox" name="status" value="AWAITING"> Awaiting</label>
             <label><input type="checkbox" name="status" value="RESCHEDULED"> Rescheduled</label>
-
-            <label><input type="checkbox" name="status" value="WORK DONE"> Work Done</label>  <script src="static/js/script.js"></script>
-
-            <label><input type="checkbox" name="status" value="SHOP DONE"> Shop Done</label></body>
-
-            <label><input type="checkbox" name="status" value="CANCELED"> Canceled</label></html>
-
+            <label><input type="checkbox" name="status" value="WORK DONE"> Work Done</label>
+            <label><input type="checkbox" name="status" value="SHOP DONE"> Shop Done</label>
+            <label><input type="checkbox" name="status" value="CANCELED"> Canceled</label>
           </div>
         </div>
 
@@ -175,21 +99,134 @@
         </div>
 
         <!-- Building Options -->
-        <div class="filter-sub-options" data-for="building">
-          <h3>Building</h3>
-          <input type="text" class="filter-search-input" id="buildingSearch" placeholder="Search buildings...">
-          <div class="checkbox-group">
-            <label><input type="checkbox" name="building" value="001"> 001</label>
-            <label><input type="checkbox" name="building" value="008"> 008</label>
-            <label><input type="checkbox" name="building" value="009"> 009</label>
-            <label><input type="checkbox" name="building" value="010"> 010</label>
-            <label><input type="checkbox" name="building" value="027"> 027</label>
-            <label><input type="checkbox" name="building" value="100"> 100</label>
-            <label><input type="checkbox" name="building" value="157"> 157</label>
-            <label><input type="checkbox" name="building" value="GP_LOT"> GP_LOT</label>
-            <!-- More buildings would be here in production -->
-          </div>
-        </div>
+                            <div class="filter-sub-options" data-for="building">
+                        <h3>Building</h3>
+                        <input type="text" class="filter-search-input" id="buildingSearch" placeholder="Search buildings...">
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="building" value="001"> 001</label>
+                            <label><input type="checkbox" name="building" value="008"> 008</label>
+                            <label><input type="checkbox" name="building" value="009"> 009</label>
+                            <label><input type="checkbox" name="building" value="010"> 010</label>
+                            <label><input type="checkbox" name="building" value="011"> 011</label>
+                            <label><input type="checkbox" name="building" value="014"> 014</label>
+                            <label><input type="checkbox" name="building" value="016"> 016</label>
+                            <label><input type="checkbox" name="building" value="017"> 017</label>
+                            <label><input type="checkbox" name="building" value="018"> 018</label>
+                            <label><input type="checkbox" name="building" value="019"> 019</label>
+                            <label><input type="checkbox" name="building" value="022"> 022</label>
+                            <label><input type="checkbox" name="building" value="027"> 027</label>
+                            <label><input type="checkbox" name="building" value="028"> 028</label>
+                            <label><input type="checkbox" name="building" value="029"> 029</label>
+                            <label><input type="checkbox" name="building" value="029A"> 029A</label>
+                            <label><input type="checkbox" name="building" value="031"> 031</label>
+                            <label><input type="checkbox" name="building" value="033"> 033</label>
+                            <label><input type="checkbox" name="building" value="036"> 036</label>
+                            <label><input type="checkbox" name="building" value="039"> 039</label>
+                            <label><input type="checkbox" name="building" value="040"> 040</label>
+                            <label><input type="checkbox" name="building" value="043"> 043</label>
+                            <label><input type="checkbox" name="building" value="045"> 045</label>
+                            <label><input type="checkbox" name="building" value="047"> 047</label>
+                            <label><input type="checkbox" name="building" value="051"> 051</label>
+                            <label><input type="checkbox" name="building" value="052"> 052</label>
+                            <label><input type="checkbox" name="building" value="054"> 054</label>
+                            <label><input type="checkbox" name="building" value="055"> 055</label>
+                            <label><input type="checkbox" name="building" value="056"> 056</label>
+                            <label><input type="checkbox" name="building" value="057"> 057</label>
+                            <label><input type="checkbox" name="building" value="060"> 060</label>
+                            <label><input type="checkbox" name="building" value="061"> 061</label>
+                            <label><input type="checkbox" name="building" value="065"> 065</label>
+                            <label><input type="checkbox" name="building" value="067"> 067</label>
+                            <label><input type="checkbox" name="building" value="069"> 069</label>
+                            <label><input type="checkbox" name="building" value="069A"> 069A</label>
+                            <label><input type="checkbox" name="building" value="070"> 070</label>
+                            <label><input type="checkbox" name="building" value="072"> 072</label>
+                            <label><input type="checkbox" name="building" value="076"> 076</label>
+                            <label><input type="checkbox" name="building" value="078"> 078</label>
+                            <label><input type="checkbox" name="building" value="080"> 080</label>
+                            <label><input type="checkbox" name="building" value="085"> 085</label>
+                            <label><input type="checkbox" name="building" value="086A"> 086A</label>
+                            <label><input type="checkbox" name="building" value="088"> 088</label>
+                            <label><input type="checkbox" name="building" value="089"> 089</label>
+                            <label><input type="checkbox" name="building" value="090"> 090</label>
+                            <label><input type="checkbox" name="building" value="100"> 100</label>
+                            <label><input type="checkbox" name="building" value="103"> 103</label>
+                            <label><input type="checkbox" name="building" value="106"> 106</label>
+                            <label><input type="checkbox" name="building" value="107"> 107</label>
+                            <label><input type="checkbox" name="building" value="108"> 108</label>
+                            <label><input type="checkbox" name="building" value="109"> 109</label>
+                            <label><input type="checkbox" name="building" value="110"> 110</label>
+                            <label><input type="checkbox" name="building" value="111"> 111</label>
+                            <label><input type="checkbox" name="building" value="111A"> 111A</label>
+                            <label><input type="checkbox" name="building" value="112"> 112</label>
+                            <label><input type="checkbox" name="building" value="113"> 113</label>
+                            <label><input type="checkbox" name="building" value="114"> 114</label>
+                            <label><input type="checkbox" name="building" value="115"> 115</label>
+                            <label><input type="checkbox" name="building" value="117"> 117</label>
+                            <label><input type="checkbox" name="building" value="118"> 118</label>
+                            <label><input type="checkbox" name="building" value="119"> 119</label>
+                            <label><input type="checkbox" name="building" value="120"> 120</label>
+                            <label><input type="checkbox" name="building" value="121"> 121</label>
+                            <label><input type="checkbox" name="building" value="122"> 122</label>
+                            <label><input type="checkbox" name="building" value="129"> 129</label>
+                            <label><input type="checkbox" name="building" value="129A"> 129A</label>
+                            <label><input type="checkbox" name="building" value="133"> 133</label>
+                            <label><input type="checkbox" name="building" value="134"> 134</label>
+                            <label><input type="checkbox" name="building" value="135"> 135</label>
+                            <label><input type="checkbox" name="building" value="135A"> 135A</label>
+                            <label><input type="checkbox" name="building" value="138"> 138</label>
+                            <label><input type="checkbox" name="building" value="139"> 139</label>
+                            <label><input type="checkbox" name="building" value="140"> 140</label>
+                            <label><input type="checkbox" name="building" value="144"> 144</label>
+                            <label><input type="checkbox" name="building" value="145"> 145</label>
+                            <label><input type="checkbox" name="building" value="146A"> 146A</label>
+                            <label><input type="checkbox" name="building" value="146B"> 146B</label>
+                            <label><input type="checkbox" name="building" value="146C"> 146C</label>
+                            <label><input type="checkbox" name="building" value="148K"> 148K</label>
+                            <label><input type="checkbox" name="building" value="156A"> 156A</label>
+                            <label><input type="checkbox" name="building" value="157"> 157</label>
+                            <label><input type="checkbox" name="building" value="158"> 158</label>
+                            <label><input type="checkbox" name="building" value="159"> 159</label>
+                            <label><input type="checkbox" name="building" value="160"> 160</label>
+                            <label><input type="checkbox" name="building" value="161"> 161</label>
+                            <label><input type="checkbox" name="building" value="162"> 162</label>
+                            <label><input type="checkbox" name="building" value="163"> 163</label>
+                            <label><input type="checkbox" name="building" value="164"> 164</label>
+                            <label><input type="checkbox" name="building" value="170"> 170</label>
+                            <label><input type="checkbox" name="building" value="171"> 171</label>
+                            <label><input type="checkbox" name="building" value="172"> 172</label>
+                            <label><input type="checkbox" name="building" value="173"> 173</label>
+                            <label><input type="checkbox" name="building" value="175"> 175</label>
+                            <label><input type="checkbox" name="building" value="176"> 176</label>
+                            <label><input type="checkbox" name="building" value="180A"> 180A</label>
+                            <label><input type="checkbox" name="building" value="180B"> 180B</label>
+                            <label><input type="checkbox" name="building" value="180C"> 180C</label>
+                            <label><input type="checkbox" name="building" value="180D"> 180D</label>
+                            <label><input type="checkbox" name="building" value="187"> 187</label>
+                            <label><input type="checkbox" name="building" value="187A"> 187A</label>
+                            <label><input type="checkbox" name="building" value="189"> 189</label>
+                            <label><input type="checkbox" name="building" value="190"> 190</label>
+                            <label><input type="checkbox" name="building" value="191"> 191</label>
+                            <label><input type="checkbox" name="building" value="204"> 204</label>
+                            <label><input type="checkbox" name="building" value="208"> 208</label>
+                            <label><input type="checkbox" name="building" value="208A"> 208A</label>
+                            <label><input type="checkbox" name="building" value="222"> 222</label>
+                            <label><input type="checkbox" name="building" value="229"> 229</label>
+                            <label><input type="checkbox" name="building" value="230"> 230</label>
+                            <label><input type="checkbox" name="building" value="234"> 234</label>
+                            <label><input type="checkbox" name="building" value="235"> 235</label>
+                            <label><input type="checkbox" name="building" value="236"> 236</label>
+                            <label><input type="checkbox" name="building" value="237"> 237</label>
+                            <label><input type="checkbox" name="building" value="619"> 619</label>
+                            <label><input type="checkbox" name="building" value="625"> 625</label>
+                            <label><input type="checkbox" name="building" value="631"> 631</label>
+                            <label><input type="checkbox" name="building" value="635"> 635</label>
+                            <label><input type="checkbox" name="building" value="645"> 645</label>
+                            <label><input type="checkbox" name="building" value="653"> 653</label>
+                            <label><input type="checkbox" name="building" value="661"> 661</label>
+                            <label><input type="checkbox" name="building" value="668"> 668</label>
+                            <label><input type="checkbox" name="building" value="GP_LOT"> GP_LOT</label>
+                        </div>
+                    </div>
 
         <!-- Location Options -->
         <div class="filter-sub-options" data-for="location">
@@ -197,10 +234,534 @@
           <input type="text" class="filter-search-input" id="locationSearch" placeholder="Search location codes...">
           <div class="checkbox-group">
             <label><input type="checkbox" name="location" value="001"> 001</label>
+            <label><input type="checkbox" name="location" value="002"> 002</label>
+            <label><input type="checkbox" name="location" value="002D"> 002D</label>
+            <label><input type="checkbox" name="location" value="002K"> 002K</label>
+            <label><input type="checkbox" name="location" value="003"> 003</label>
+            <label><input type="checkbox" name="location" value="005"> 005</label>
+            <label><input type="checkbox" name="location" value="006"> 006</label>
+            <label><input type="checkbox" name="location" value="006A"> 006A</label>
+            <label><input type="checkbox" name="location" value="007"> 007</label>
+            <label><input type="checkbox" name="location" value="009"> 009</label>
+            <label><input type="checkbox" name="location" value="010"> 010</label>
+            <label><input type="checkbox" name="location" value="012"> 012</label>
+            <label><input type="checkbox" name="location" value="013"> 013</label>
+            <label><input type="checkbox" name="location" value="013B"> 013B</label>
+            <label><input type="checkbox" name="location" value="022"> 022</label>
+            <label><input type="checkbox" name="location" value="024"> 024</label>
+            <label><input type="checkbox" name="location" value="026"> 026</label>
+            <label><input type="checkbox" name="location" value="027"> 027</label>
+            <label><input type="checkbox" name="location" value="028B"> 028B</label>
+            <label><input type="checkbox" name="location" value="032B"> 032B</label>
+            <label><input type="checkbox" name="location" value="039"> 039</label>
+            <label><input type="checkbox" name="location" value="045"> 045</label>
+            <label><input type="checkbox" name="location" value="046A"> 046A</label>
+            <label><input type="checkbox" name="location" value="049"> 049</label>
             <label><input type="checkbox" name="location" value="100"> 100</label>
+            <label><input type="checkbox" name="location" value="1001"> 1001</label>
+            <label><input type="checkbox" name="location" value="1003A"> 1003A</label>
+            <label><input type="checkbox" name="location" value="1008"> 1008</label>
             <label><input type="checkbox" name="location" value="101"> 101</label>
-            <label><input type="checkbox" name="location" value="200"> 200</label>
-            <!-- More locations would be here in production -->
+            <label><input type="checkbox" name="location" value="101B"> 101B</label>
+            <label><input type="checkbox" name="location" value="101C"> 101C</label>
+            <label><input type="checkbox" name="location" value="101D"> 101D</label>
+            <label><input type="checkbox" name="location" value="101G"> 101G</label>
+            <label><input type="checkbox" name="location" value="102"> 102</label>
+            <label><input type="checkbox" name="location" value="102A"> 102A</label>
+            <label><input type="checkbox" name="location" value="103"> 103</label>
+            <label><input type="checkbox" name="location" value="103A"> 103A</label>
+            <label><input type="checkbox" name="location" value="103F"> 103F</label>
+            <label><input type="checkbox" name="location" value="103G"> 103G</label>
+            <label><input type="checkbox" name="location" value="104"> 104</label>
+            <label><input type="checkbox" name="location" value="105"> 105</label>
+            <label><input type="checkbox" name="location" value="105A"> 105A</label>
+            <label><input type="checkbox" name="location" value="106F"> 106F</label>
+            <label><input type="checkbox" name="location" value="107"> 107</label>
+            <label><input type="checkbox" name="location" value="107A"> 107A</label>
+            <label><input type="checkbox" name="location" value="107D"> 107D</label>
+            <label><input type="checkbox" name="location" value="107E"> 107E</label>
+            <label><input type="checkbox" name="location" value="108"> 108</label>
+            <label><input type="checkbox" name="location" value="108A"> 108A</label>
+            <label><input type="checkbox" name="location" value="108B"> 108B</label>
+            <label><input type="checkbox" name="location" value="108H"> 108H</label>
+            <label><input type="checkbox" name="location" value="109"> 109</label>
+            <label><input type="checkbox" name="location" value="109H"> 109H</label>
+            <label><input type="checkbox" name="location" value="110"> 110</label>
+            <label><input type="checkbox" name="location" value="1101"> 1101</label>
+            <label><input type="checkbox" name="location" value="1102"> 1102</label>
+            <label><input type="checkbox" name="location" value="110A"> 110A</label>
+            <label><input type="checkbox" name="location" value="110B"> 110B</label>
+            <label><input type="checkbox" name="location" value="110E"> 110E</label>
+            <label><input type="checkbox" name="location" value="111"> 111</label>
+            <label><input type="checkbox" name="location" value="1112"> 1112</label>
+            <label><input type="checkbox" name="location" value="1117"> 1117</label>
+            <label><input type="checkbox" name="location" value="111B"> 111B</label>
+            <label><input type="checkbox" name="location" value="112"> 112</label>
+            <label><input type="checkbox" name="location" value="112A"> 112A</label>
+            <label><input type="checkbox" name="location" value="112B"> 112B</label>
+            <label><input type="checkbox" name="location" value="113"> 113</label>
+            <label><input type="checkbox" name="location" value="114"> 114</label>
+            <label><input type="checkbox" name="location" value="115"> 115</label>
+            <label><input type="checkbox" name="location" value="116"> 116</label>
+            <label><input type="checkbox" name="location" value="117"> 117</label>
+            <label><input type="checkbox" name="location" value="118"> 118</label>
+            <label><input type="checkbox" name="location" value="119"> 119</label>
+            <label><input type="checkbox" name="location" value="1207"> 1207</label>
+            <label><input type="checkbox" name="location" value="120A"> 120A</label>
+            <label><input type="checkbox" name="location" value="121"> 121</label>
+            <label><input type="checkbox" name="location" value="1210C"> 1210C</label>
+            <label><input type="checkbox" name="location" value="122"> 122</label>
+            <label><input type="checkbox" name="location" value="122B"> 122B</label>
+            <label><input type="checkbox" name="location" value="123"> 123</label>
+            <label><input type="checkbox" name="location" value="1237"> 1237</label>
+            <label><input type="checkbox" name="location" value="1239B"> 1239B</label>
+            <label><input type="checkbox" name="location" value="124"> 124</label>
+            <label><input type="checkbox" name="location" value="1241"> 1241</label>
+            <label><input type="checkbox" name="location" value="1248"> 1248</label>
+            <label><input type="checkbox" name="location" value="1258"> 1258</label>
+            <label><input type="checkbox" name="location" value="126A"> 126A</label>
+            <label><input type="checkbox" name="location" value="127"> 127</label>
+            <label><input type="checkbox" name="location" value="128"> 128</label>
+            <label><input type="checkbox" name="location" value="129"> 129</label>
+            <label><input type="checkbox" name="location" value="130"> 130</label>
+            <label><input type="checkbox" name="location" value="1300"> 1300</label>
+            <label><input type="checkbox" name="location" value="1301"> 1301</label>
+            <label><input type="checkbox" name="location" value="1303"> 1303</label>
+            <label><input type="checkbox" name="location" value="131"> 131</label>
+            <label><input type="checkbox" name="location" value="1310"> 1310</label>
+            <label><input type="checkbox" name="location" value="1311"> 1311</label>
+            <label><input type="checkbox" name="location" value="1318"> 1318</label>
+            <label><input type="checkbox" name="location" value="1344A"> 1344A</label>
+            <label><input type="checkbox" name="location" value="136B"> 136B</label>
+            <label><input type="checkbox" name="location" value="139"> 139</label>
+            <label><input type="checkbox" name="location" value="1400"> 1400</label>
+            <label><input type="checkbox" name="location" value="1410"> 1410</label>
+            <label><input type="checkbox" name="location" value="1412B"> 1412B</label>
+            <label><input type="checkbox" name="location" value="1412D"> 1412D</label>
+            <label><input type="checkbox" name="location" value="1413"> 1413</label>
+            <label><input type="checkbox" name="location" value="1414"> 1414</label>
+            <label><input type="checkbox" name="location" value="142"> 142</label>
+            <label><input type="checkbox" name="location" value="1429"> 1429</label>
+            <label><input type="checkbox" name="location" value="150"> 150</label>
+            <label><input type="checkbox" name="location" value="1509"> 1509</label>
+            <label><input type="checkbox" name="location" value="1516"> 1516</label>
+            <label><input type="checkbox" name="location" value="1532"> 1532</label>
+            <label><input type="checkbox" name="location" value="1544"> 1544</label>
+            <label><input type="checkbox" name="location" value="1544A"> 1544A</label>
+            <label><input type="checkbox" name="location" value="158"> 158</label>
+            <label><input type="checkbox" name="location" value="1609A"> 1609A</label>
+            <label><input type="checkbox" name="location" value="1610"> 1610</label>
+            <label><input type="checkbox" name="location" value="1612A"> 1612A</label>
+            <label><input type="checkbox" name="location" value="1612C"> 1612C</label>
+            <label><input type="checkbox" name="location" value="162"> 162</label>
+            <label><input type="checkbox" name="location" value="1628"> 1628</label>
+            <label><input type="checkbox" name="location" value="1644B"> 1644B</label>
+            <label><input type="checkbox" name="location" value="1644E"> 1644E</label>
+            <label><input type="checkbox" name="location" value="1702"> 1702</label>
+            <label><input type="checkbox" name="location" value="1703"> 1703</label>
+            <label><input type="checkbox" name="location" value="172"> 172</label>
+            <label><input type="checkbox" name="location" value="1815"> 1815</label>
+            <label><input type="checkbox" name="location" value="1B10"> 1B10</label>
+            <label><input type="checkbox" name="location" value="1B22"> 1B22</label>
+            <label><input type="checkbox" name="location" value="1B22A"> 1B22A</label>
+            <label><input type="checkbox" name="location" value="1B36"> 1B36</label>
+            <label><input type="checkbox" name="location" value="201"> 201</label>
+            <label><input type="checkbox" name="location" value="201A"> 201A</label>
+            <label><input type="checkbox" name="location" value="201C"> 201C</label>
+            <label><input type="checkbox" name="location" value="201D"> 201D</label>
+            <label><input type="checkbox" name="location" value="201F"> 201F</label>
+            <label><input type="checkbox" name="location" value="202"> 202</label>
+            <label><input type="checkbox" name="location" value="202C"> 202C</label>
+            <label><input type="checkbox" name="location" value="202F"> 202F</label>
+            <label><input type="checkbox" name="location" value="203"> 203</label>
+            <label><input type="checkbox" name="location" value="203A"> 203A</label>
+            <label><input type="checkbox" name="location" value="203C"> 203C</label>
+            <label><input type="checkbox" name="location" value="203D"> 203D</label>
+            <label><input type="checkbox" name="location" value="204"> 204</label>
+            <label><input type="checkbox" name="location" value="204C"> 204C</label>
+            <label><input type="checkbox" name="location" value="204D"> 204D</label>
+            <label><input type="checkbox" name="location" value="204E"> 204E</label>
+            <label><input type="checkbox" name="location" value="205"> 205</label>
+            <label><input type="checkbox" name="location" value="206"> 206</label>
+            <label><input type="checkbox" name="location" value="206A"> 206A</label>
+            <label><input type="checkbox" name="location" value="206F"> 206F</label>
+            <label><input type="checkbox" name="location" value="207"> 207</label>
+            <label><input type="checkbox" name="location" value="207A"> 207A</label>
+            <label><input type="checkbox" name="location" value="207B"> 207B</label>
+            <label><input type="checkbox" name="location" value="208"> 208</label>
+            <label><input type="checkbox" name="location" value="208E"> 208E</label>
+            <label><input type="checkbox" name="location" value="209"> 209</label>
+            <label><input type="checkbox" name="location" value="210"> 210</label>
+            <label><input type="checkbox" name="location" value="2102A"> 2102A</label>
+            <label><input type="checkbox" name="location" value="211"> 211</label>
+            <label><input type="checkbox" name="location" value="2118"> 2118</label>
+            <label><input type="checkbox" name="location" value="211C"> 211C</label>
+            <label><input type="checkbox" name="location" value="211D"> 211D</label>
+            <label><input type="checkbox" name="location" value="212"> 212</label>
+            <label><input type="checkbox" name="location" value="212D"> 212D</label>
+            <label><input type="checkbox" name="location" value="213"> 213</label>
+            <label><input type="checkbox" name="location" value="213D"> 213D</label>
+            <label><input type="checkbox" name="location" value="214"> 214</label>
+            <label><input type="checkbox" name="location" value="214B"> 214B</label>
+            <label><input type="checkbox" name="location" value="215"> 215</label>
+            <label><input type="checkbox" name="location" value="215A"> 215A</label>
+            <label><input type="checkbox" name="location" value="216"> 216</label>
+            <label><input type="checkbox" name="location" value="216E"> 216E</label>
+            <label><input type="checkbox" name="location" value="217A"> 217A</label>
+            <label><input type="checkbox" name="location" value="218"> 218</label>
+            <label><input type="checkbox" name="location" value="218A"> 218A</label>
+            <label><input type="checkbox" name="location" value="219"> 219</label>
+            <label><input type="checkbox" name="location" value="220"> 220</label>
+            <label><input type="checkbox" name="location" value="220A"> 220A</label>
+            <label><input type="checkbox" name="location" value="2216"> 2216</label>
+            <label><input type="checkbox" name="location" value="222"> 222</label>
+            <label><input type="checkbox" name="location" value="224"> 224</label>
+            <label><input type="checkbox" name="location" value="224A"> 224A</label>
+            <label><input type="checkbox" name="location" value="225"> 225</label>
+            <label><input type="checkbox" name="location" value="225B"> 225B</label>
+            <label><input type="checkbox" name="location" value="226"> 226</label>
+            <label><input type="checkbox" name="location" value="227"> 227</label>
+            <label><input type="checkbox" name="location" value="228"> 228</label>
+            <label><input type="checkbox" name="location" value="229A"> 229A</label>
+            <label><input type="checkbox" name="location" value="231"> 231</label>
+            <label><input type="checkbox" name="location" value="2321"> 2321</label>
+            <label><input type="checkbox" name="location" value="235"> 235</label>
+            <label><input type="checkbox" name="location" value="235H"> 235H</label>
+            <label><input type="checkbox" name="location" value="237"> 237</label>
+            <label><input type="checkbox" name="location" value="237E"> 237E</label>
+            <label><input type="checkbox" name="location" value="240"> 240</label>
+            <label><input type="checkbox" name="location" value="2401"> 2401</label>
+            <label><input type="checkbox" name="location" value="2417"> 2417</label>
+            <label><input type="checkbox" name="location" value="2419"> 2419</label>
+            <label><input type="checkbox" name="location" value="2425"> 2425</label>
+            <label><input type="checkbox" name="location" value="252"> 252</label>
+            <label><input type="checkbox" name="location" value="2520"> 2520</label>
+            <label><input type="checkbox" name="location" value="2525"> 2525</label>
+            <label><input type="checkbox" name="location" value="253A"> 253A</label>
+            <label><input type="checkbox" name="location" value="259"> 259</label>
+            <label><input type="checkbox" name="location" value="261"> 261</label>
+            <label><input type="checkbox" name="location" value="2616"> 2616</label>
+            <label><input type="checkbox" name="location" value="2617"> 2617</label>
+            <label><input type="checkbox" name="location" value="2625"> 2625</label>
+            <label><input type="checkbox" name="location" value="263"> 263</label>
+            <label><input type="checkbox" name="location" value="282"> 282</label>
+            <label><input type="checkbox" name="location" value="300D"> 300D</label>
+            <label><input type="checkbox" name="location" value="301"> 301</label>
+            <label><input type="checkbox" name="location" value="301A"> 301A</label>
+            <label><input type="checkbox" name="location" value="302"> 302</label>
+            <label><input type="checkbox" name="location" value="302B"> 302B</label>
+            <label><input type="checkbox" name="location" value="302D"> 302D</label>
+            <label><input type="checkbox" name="location" value="303"> 303</label>
+            <label><input type="checkbox" name="location" value="304"> 304</label>
+            <label><input type="checkbox" name="location" value="304A"> 304A</label>
+            <label><input type="checkbox" name="location" value="304E"> 304E</label>
+            <label><input type="checkbox" name="location" value="305"> 305</label>
+            <label><input type="checkbox" name="location" value="305A"> 305A</label>
+            <label><input type="checkbox" name="location" value="306"> 306</label>
+            <label><input type="checkbox" name="location" value="306B"> 306B</label>
+            <label><input type="checkbox" name="location" value="306F"> 306F</label>
+            <label><input type="checkbox" name="location" value="307"> 307</label>
+            <label><input type="checkbox" name="location" value="310"> 310</label>
+            <label><input type="checkbox" name="location" value="311"> 311</label>
+            <label><input type="checkbox" name="location" value="311D"> 311D</label>
+            <label><input type="checkbox" name="location" value="312"> 312</label>
+            <label><input type="checkbox" name="location" value="312A"> 312A</label>
+            <label><input type="checkbox" name="location" value="312C"> 312C</label>
+            <label><input type="checkbox" name="location" value="314"> 314</label>
+            <label><input type="checkbox" name="location" value="314A"> 314A</label>
+            <label><input type="checkbox" name="location" value="315"> 315</label>
+            <label><input type="checkbox" name="location" value="319A"> 319A</label>
+            <label><input type="checkbox" name="location" value="320"> 320</label>
+            <label><input type="checkbox" name="location" value="3213"> 3213</label>
+            <label><input type="checkbox" name="location" value="3215"> 3215</label>
+            <label><input type="checkbox" name="location" value="321A"> 321A</label>
+            <label><input type="checkbox" name="location" value="323"> 323</label>
+            <label><input type="checkbox" name="location" value="3237B"> 3237B</label>
+            <label><input type="checkbox" name="location" value="326"> 326</label>
+            <label><input type="checkbox" name="location" value="327"> 327</label>
+            <label><input type="checkbox" name="location" value="331A"> 331A</label>
+            <label><input type="checkbox" name="location" value="334D"> 334D</label>
+            <label><input type="checkbox" name="location" value="335"> 335</label>
+            <label><input type="checkbox" name="location" value="342"> 342</label>
+            <label><input type="checkbox" name="location" value="343"> 343</label>
+            <label><input type="checkbox" name="location" value="345"> 345</label>
+            <label><input type="checkbox" name="location" value="346"> 346</label>
+            <label><input type="checkbox" name="location" value="350"> 350</label>
+            <label><input type="checkbox" name="location" value="351"> 351</label>
+            <label><input type="checkbox" name="location" value="351A"> 351A</label>
+            <label><input type="checkbox" name="location" value="353"> 353</label>
+            <label><input type="checkbox" name="location" value="354"> 354</label>
+            <label><input type="checkbox" name="location" value="359"> 359</label>
+            <label><input type="checkbox" name="location" value="3619"> 3619</label>
+            <label><input type="checkbox" name="location" value="364"> 364</label>
+            <label><input type="checkbox" name="location" value="381"> 381</label>
+            <label><input type="checkbox" name="location" value="3B05"> 3B05</label>
+            <label><input type="checkbox" name="location" value="400"> 400</label>
+            <label><input type="checkbox" name="location" value="400A"> 400A</label>
+            <label><input type="checkbox" name="location" value="401B"> 401B</label>
+            <label><input type="checkbox" name="location" value="403"> 403</label>
+            <label><input type="checkbox" name="location" value="403C"> 403C</label>
+            <label><input type="checkbox" name="location" value="404"> 404</label>
+            <label><input type="checkbox" name="location" value="405"> 405</label>
+            <label><input type="checkbox" name="location" value="406"> 406</label>
+            <label><input type="checkbox" name="location" value="407"> 407</label>
+            <label><input type="checkbox" name="location" value="409C"> 409C</label>
+            <label><input type="checkbox" name="location" value="4101"> 4101</label>
+            <label><input type="checkbox" name="location" value="410A"> 410A</label>
+            <label><input type="checkbox" name="location" value="410D"> 410D</label>
+            <label><input type="checkbox" name="location" value="410N"> 410N</label>
+            <label><input type="checkbox" name="location" value="411"> 411</label>
+            <label><input type="checkbox" name="location" value="4117"> 4117</label>
+            <label><input type="checkbox" name="location" value="411C"> 411C</label>
+            <label><input type="checkbox" name="location" value="412"> 412</label>
+            <label><input type="checkbox" name="location" value="412A"> 412A</label>
+            <label><input type="checkbox" name="location" value="413"> 413</label>
+            <label><input type="checkbox" name="location" value="414Q"> 414Q</label>
+            <label><input type="checkbox" name="location" value="416"> 416</label>
+            <label><input type="checkbox" name="location" value="417"> 417</label>
+            <label><input type="checkbox" name="location" value="418B"> 418B</label>
+            <label><input type="checkbox" name="location" value="419"> 419</label>
+            <label><input type="checkbox" name="location" value="4211B"> 4211B</label>
+            <label><input type="checkbox" name="location" value="422"> 422</label>
+            <label><input type="checkbox" name="location" value="424"> 424</label>
+            <label><input type="checkbox" name="location" value="425"> 425</label>
+            <label><input type="checkbox" name="location" value="428"> 428</label>
+            <label><input type="checkbox" name="location" value="431"> 431</label>
+            <label><input type="checkbox" name="location" value="4316"> 4316</label>
+            <label><input type="checkbox" name="location" value="4319"> 4319</label>
+            <label><input type="checkbox" name="location" value="433"> 433</label>
+            <label><input type="checkbox" name="location" value="4333B"> 4333B</label>
+            <label><input type="checkbox" name="location" value="4334"> 4334</label>
+            <label><input type="checkbox" name="location" value="4335"> 4335</label>
+            <label><input type="checkbox" name="location" value="433A"> 433A</label>
+            <label><input type="checkbox" name="location" value="4404B"> 4404B</label>
+            <label><input type="checkbox" name="location" value="4412"> 4412</label>
+            <label><input type="checkbox" name="location" value="448"> 448</label>
+            <label><input type="checkbox" name="location" value="450"> 450</label>
+            <label><input type="checkbox" name="location" value="451"> 451</label>
+            <label><input type="checkbox" name="location" value="4524"> 4524</label>
+            <label><input type="checkbox" name="location" value="4532"> 4532</label>
+            <label><input type="checkbox" name="location" value="455"> 455</label>
+            <label><input type="checkbox" name="location" value="459"> 459</label>
+            <label><input type="checkbox" name="location" value="4601"> 4601</label>
+            <label><input type="checkbox" name="location" value="4605"> 4605</label>
+            <label><input type="checkbox" name="location" value="4606"> 4606</label>
+            <label><input type="checkbox" name="location" value="4617"> 4617</label>
+            <label><input type="checkbox" name="location" value="4618"> 4618</label>
+            <label><input type="checkbox" name="location" value="4623A"> 4623A</label>
+            <label><input type="checkbox" name="location" value="4623B"> 4623B</label>
+            <label><input type="checkbox" name="location" value="4624"> 4624</label>
+            <label><input type="checkbox" name="location" value="4627"> 4627</label>
+            <label><input type="checkbox" name="location" value="4629B"> 4629B</label>
+            <label><input type="checkbox" name="location" value="4635"> 4635</label>
+            <label><input type="checkbox" name="location" value="474"> 474</label>
+            <label><input type="checkbox" name="location" value="501"> 501</label>
+            <label><input type="checkbox" name="location" value="508"> 508</label>
+            <label><input type="checkbox" name="location" value="509"> 509</label>
+            <label><input type="checkbox" name="location" value="510"> 510</label>
+            <label><input type="checkbox" name="location" value="512"> 512</label>
+            <label><input type="checkbox" name="location" value="515B"> 515B</label>
+            <label><input type="checkbox" name="location" value="517B"> 517B</label>
+            <label><input type="checkbox" name="location" value="518"> 518</label>
+            <label><input type="checkbox" name="location" value="519"> 519</label>
+            <label><input type="checkbox" name="location" value="523"> 523</label>
+            <label><input type="checkbox" name="location" value="524"> 524</label>
+            <label><input type="checkbox" name="location" value="529"> 529</label>
+            <label><input type="checkbox" name="location" value="530"> 530</label>
+            <label><input type="checkbox" name="location" value="543"> 543</label>
+            <label><input type="checkbox" name="location" value="551"> 551</label>
+            <label><input type="checkbox" name="location" value="600"> 600</label>
+            <label><input type="checkbox" name="location" value="600D"> 600D</label>
+            <label><input type="checkbox" name="location" value="602B"> 602B</label>
+            <label><input type="checkbox" name="location" value="603"> 603</label>
+            <label><input type="checkbox" name="location" value="603D"> 603D</label>
+            <label><input type="checkbox" name="location" value="604"> 604</label>
+            <label><input type="checkbox" name="location" value="607"> 607</label>
+            <label><input type="checkbox" name="location" value="608"> 608</label>
+            <label><input type="checkbox" name="location" value="610A"> 610A</label>
+            <label><input type="checkbox" name="location" value="616"> 616</label>
+            <label><input type="checkbox" name="location" value="617B"> 617B</label>
+            <label><input type="checkbox" name="location" value="619"> 619</label>
+            <label><input type="checkbox" name="location" value="620"> 620</label>
+            <label><input type="checkbox" name="location" value="637"> 637</label>
+            <label><input type="checkbox" name="location" value="643"> 643</label>
+            <label><input type="checkbox" name="location" value="652"> 652</label>
+            <label><input type="checkbox" name="location" value="658"> 658</label>
+            <label><input type="checkbox" name="location" value="664"> 664</label>
+            <label><input type="checkbox" name="location" value="700"> 700</label>
+            <label><input type="checkbox" name="location" value="700D"> 700D</label>
+            <label><input type="checkbox" name="location" value="702"> 702</label>
+            <label><input type="checkbox" name="location" value="702E"> 702E</label>
+            <label><input type="checkbox" name="location" value="703"> 703</label>
+            <label><input type="checkbox" name="location" value="703B"> 703B</label>
+            <label><input type="checkbox" name="location" value="706A"> 706A</label>
+            <label><input type="checkbox" name="location" value="707A"> 707A</label>
+            <label><input type="checkbox" name="location" value="712"> 712</label>
+            <label><input type="checkbox" name="location" value="712A"> 712A</label>
+            <label><input type="checkbox" name="location" value="718"> 718</label>
+            <label><input type="checkbox" name="location" value="725"> 725</label>
+            <label><input type="checkbox" name="location" value="726"> 726</label>
+            <label><input type="checkbox" name="location" value="727"> 727</label>
+            <label><input type="checkbox" name="location" value="728"> 728</label>
+            <label><input type="checkbox" name="location" value="733"> 733</label>
+            <label><input type="checkbox" name="location" value="733A"> 733A</label>
+            <label><input type="checkbox" name="location" value="734"> 734</label>
+            <label><input type="checkbox" name="location" value="736"> 736</label>
+            <label><input type="checkbox" name="location" value="762"> 762</label>
+            <label><input type="checkbox" name="location" value="768"> 768</label>
+            <label><input type="checkbox" name="location" value="772"> 772</label>
+            <label><input type="checkbox" name="location" value="776"> 776</label>
+            <label><input type="checkbox" name="location" value="794"> 794</label>
+            <label><input type="checkbox" name="location" value="800"> 800</label>
+            <label><input type="checkbox" name="location" value="801U"> 801U</label>
+            <label><input type="checkbox" name="location" value="803"> 803</label>
+            <label><input type="checkbox" name="location" value="804"> 804</label>
+            <label><input type="checkbox" name="location" value="806"> 806</label>
+            <label><input type="checkbox" name="location" value="811"> 811</label>
+            <label><input type="checkbox" name="location" value="811A"> 811A</label>
+            <label><input type="checkbox" name="location" value="818"> 818</label>
+            <label><input type="checkbox" name="location" value="824"> 824</label>
+            <label><input type="checkbox" name="location" value="841"> 841</label>
+            <label><input type="checkbox" name="location" value="901"> 901</label>
+            <label><input type="checkbox" name="location" value="904"> 904</label>
+            <label><input type="checkbox" name="location" value="906A"> 906A</label>
+            <label><input type="checkbox" name="location" value="906B"> 906B</label>
+            <label><input type="checkbox" name="location" value="911"> 911</label>
+            <label><input type="checkbox" name="location" value="912"> 912</label>
+            <label><input type="checkbox" name="location" value="917"> 917</label>
+            <label><input type="checkbox" name="location" value="924"> 924</label>
+            <label><input type="checkbox" name="location" value="948"> 948</label>
+            <label><input type="checkbox" name="location" value="966"> 966</label>
+            <label><input type="checkbox" name="location" value="A001"> A001</label>
+            <label><input type="checkbox" name="location" value="A002"> A002</label>
+            <label><input type="checkbox" name="location" value="A009"> A009</label>
+            <label><input type="checkbox" name="location" value="A1001"> A1001</label>
+            <label><input type="checkbox" name="location" value="A1006"> A1006</label>
+            <label><input type="checkbox" name="location" value="A103"> A103</label>
+            <label><input type="checkbox" name="location" value="A104"> A104</label>
+            <label><input type="checkbox" name="location" value="A105"> A105</label>
+            <label><input type="checkbox" name="location" value="A119"> A119</label>
+            <label><input type="checkbox" name="location" value="A137"> A137</label>
+            <label><input type="checkbox" name="location" value="A144"> A144</label>
+            <label><input type="checkbox" name="location" value="A201"> A201</label>
+            <label><input type="checkbox" name="location" value="A212"> A212</label>
+            <label><input type="checkbox" name="location" value="A404"> A404</label>
+            <label><input type="checkbox" name="location" value="A440"> A440</label>
+            <label><input type="checkbox" name="location" value="A502"> A502</label>
+            <label><input type="checkbox" name="location" value="A544"> A544</label>
+            <label><input type="checkbox" name="location" value="A563"> A563</label>
+            <label><input type="checkbox" name="location" value="A570"> A570</label>
+            <label><input type="checkbox" name="location" value="A629"> A629</label>
+            <label><input type="checkbox" name="location" value="A801"> A801</label>
+            <label><input type="checkbox" name="location" value="A808"> A808</label>
+            <label><input type="checkbox" name="location" value="AH001"> AH001</label>
+            <label><input type="checkbox" name="location" value="B1014"> B1014</label>
+            <label><input type="checkbox" name="location" value="B105"> B105</label>
+            <label><input type="checkbox" name="location" value="B202"> B202</label>
+            <label><input type="checkbox" name="location" value="B301"> B301</label>
+            <label><input type="checkbox" name="location" value="B331"> B331</label>
+            <label><input type="checkbox" name="location" value="B343"> B343</label>
+            <label><input type="checkbox" name="location" value="B346"> B346</label>
+            <label><input type="checkbox" name="location" value="B503"> B503</label>
+            <label><input type="checkbox" name="location" value="B510"> B510</label>
+            <label><input type="checkbox" name="location" value="B512"> B512</label>
+            <label><input type="checkbox" name="location" value="B543"> B543</label>
+            <label><input type="checkbox" name="location" value="B60"> B60</label>
+            <label><input type="checkbox" name="location" value="B603"> B603</label>
+            <label><input type="checkbox" name="location" value="B613"> B613</label>
+            <label><input type="checkbox" name="location" value="B636"> B636</label>
+            <label><input type="checkbox" name="location" value="B641"> B641</label>
+            <label><input type="checkbox" name="location" value="B913"> B913</label>
+            <label><input type="checkbox" name="location" value="C1011"> C1011</label>
+            <label><input type="checkbox" name="location" value="C102"> C102</label>
+            <label><input type="checkbox" name="location" value="C105"> C105</label>
+            <label><input type="checkbox" name="location" value="C211"> C211</label>
+            <label><input type="checkbox" name="location" value="C311"> C311</label>
+            <label><input type="checkbox" name="location" value="C706"> C706</label>
+            <label><input type="checkbox" name="location" value="C805"> C805</label>
+            <label><input type="checkbox" name="location" value="C811"> C811</label>
+            <label><input type="checkbox" name="location" value="CA236"> CA236</label>
+            <label><input type="checkbox" name="location" value="CA306"> CA306</label>
+            <label><input type="checkbox" name="location" value="CA336"> CA336</label>
+            <label><input type="checkbox" name="location" value="CA409"> CA409</label>
+            <label><input type="checkbox" name="location" value="D015"> D015</label>
+            <label><input type="checkbox" name="location" value="EV001"> EV001</label>
+            <label><input type="checkbox" name="location" value="EV004"> EV004</label>
+            <label><input type="checkbox" name="location" value="EV101"> EV101</label>
+            <label><input type="checkbox" name="location" value="EV102"> EV102</label>
+            <label><input type="checkbox" name="location" value="EV103"> EV103</label>
+            <label><input type="checkbox" name="location" value="EV105"> EV105</label>
+            <label><input type="checkbox" name="location" value="EV201"> EV201</label>
+            <label><input type="checkbox" name="location" value="EV301"> EV301</label>
+            <label><input type="checkbox" name="location" value="EV302"> EV302</label>
+            <label><input type="checkbox" name="location" value="EV303"> EV303</label>
+            <label><input type="checkbox" name="location" value="EV305"> EV305</label>
+            <label><input type="checkbox" name="location" value="EV402"> EV402</label>
+            <label><input type="checkbox" name="location" value="EV502"> EV502</label>
+            <label><input type="checkbox" name="location" value="EV503"> EV503</label>
+            <label><input type="checkbox" name="location" value="EV805"> EV805</label>
+            <label><input type="checkbox" name="location" value="EVL502"> EVL502</label>
+            <label><input type="checkbox" name="location" value="EVZ03"> EVZ03</label>
+            <label><input type="checkbox" name="location" value="H001"> H001</label>
+            <label><input type="checkbox" name="location" value="H014"> H014</label>
+            <label><input type="checkbox" name="location" value="H100"> H100</label>
+            <label><input type="checkbox" name="location" value="H101"> H101</label>
+            <label><input type="checkbox" name="location" value="H102"> H102</label>
+            <label><input type="checkbox" name="location" value="H106"> H106</label>
+            <label><input type="checkbox" name="location" value="H110"> H110</label>
+            <label><input type="checkbox" name="location" value="H116"> H116</label>
+            <label><input type="checkbox" name="location" value="H201"> H201</label>
+            <label><input type="checkbox" name="location" value="H202"> H202</label>
+            <label><input type="checkbox" name="location" value="H204"> H204</label>
+            <label><input type="checkbox" name="location" value="H303"> H303</label>
+            <label><input type="checkbox" name="location" value="H401"> H401</label>
+            <label><input type="checkbox" name="location" value="HA003"> HA003</label>
+            <label><input type="checkbox" name="location" value="HA401"> HA401</label>
+            <label><input type="checkbox" name="location" value="HA701"> HA701</label>
+            <label><input type="checkbox" name="location" value="HA903"> HA903</label>
+            <label><input type="checkbox" name="location" value="HCA301"> HCA301</label>
+            <label><input type="checkbox" name="location" value="L120"> L120</label>
+            <label><input type="checkbox" name="location" value="L447"> L447</label>
+            <label><input type="checkbox" name="location" value="L516"> L516</label>
+            <label><input type="checkbox" name="location" value="M001"> M001</label>
+            <label><input type="checkbox" name="location" value="M123"> M123</label>
+            <label><input type="checkbox" name="location" value="M128"> M128</label>
+            <label><input type="checkbox" name="location" value="M134"> M134</label>
+            <label><input type="checkbox" name="location" value="M139"> M139</label>
+            <label><input type="checkbox" name="location" value="M301"> M301</label>
+            <label><input type="checkbox" name="location" value="S123"> S123</label>
+            <label><input type="checkbox" name="location" value="S137"> S137</label>
+            <label><input type="checkbox" name="location" value="S142"> S142</label>
+            <label><input type="checkbox" name="location" value="S221"> S221</label>
+            <label><input type="checkbox" name="location" value="S229"> S229</label>
+            <label><input type="checkbox" name="location" value="S238"> S238</label>
+            <label><input type="checkbox" name="location" value="S280"> S280</label>
+            <label><input type="checkbox" name="location" value="S281"> S281</label>
+            <label><input type="checkbox" name="location" value="S395"> S395</label>
+            <label><input type="checkbox" name="location" value="ST003"> ST003</label>
+            <label><input type="checkbox" name="location" value="ST006"> ST006</label>
+            <label><input type="checkbox" name="location" value="ST101"> ST101</label>
+            <label><input type="checkbox" name="location" value="ST201"> ST201</label>
+            <label><input type="checkbox" name="location" value="ST403"> ST403</label>
+            <label><input type="checkbox" name="location" value="T2W"> T2W</label>
+            <label><input type="checkbox" name="location" value="T3W"> T3W</label>
+            <label><input type="checkbox" name="location" value="V101"> V101</label>
+            <label><input type="checkbox" name="location" value="V102"> V102</label>
+            <label><input type="checkbox" name="location" value="V103"> V103</label>
+            <label><input type="checkbox" name="location" value="V201"> V201</label>
+            <label><input type="checkbox" name="location" value="V403"> V403</label>
+            <label><input type="checkbox" name="location" value="V501"> V501</label>
+            <label><input type="checkbox" name="location" value="VA202"> VA202</label>
+            <label><input type="checkbox" name="location" value="W001"> W001</label>
+            <label><input type="checkbox" name="location" value="W013"> W013</label>
+            <label><input type="checkbox" name="location" value="W024"> W024</label>
+            <label><input type="checkbox" name="location" value="W126"> W126</label>
+            <label><input type="checkbox" name="location" value="W135"> W135</label>
+            <label><input type="checkbox" name="location" value="W327"> W327</label>
+            <label><input type="checkbox" name="location" value="W412"> W412</label>
+            <label><input type="checkbox" name="location" value="WH401"> WH401</label>
+            <label><input type="checkbox" name="location" value="X101"> X101</label>
+            <label><input type="checkbox" name="location" value="X102"> X102</label>
           </div>
         </div>
       </div>

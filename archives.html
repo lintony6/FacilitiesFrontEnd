@@ -21,32 +21,102 @@
       </select>
     </div>
 
+    <!-- Archive Entry 1 -->
     <div class="archive-item">
       <div class="archive-left">
         <img src="static/icons/file.png" alt="File icon">
         <div class="archive-details">
-          <span class="archive-title">Supervisor Report - January 01, 2025</span>
-          <span class="archive-date">Generated 2025-01-01, 14:05</span>
+          <span class="archive-title">Supervisor Report - November 13, 2025</span>
+          <span class="archive-date">Generated 2025-11-13, 16:30</span>
         </div>
       </div>
       <div class="archive-right">
-        <button class="preview-btn">Preview</button>
-        <button class="download-btn"><img src="static/icons/download.png" alt="Download"></button>
+        <button class="preview-btn" onclick="previewArchiveItem(1)">Preview</button>
+        <button class="download-btn" onclick="downloadArchiveItem(1)"><img src="static/icons/download.png" alt="Download"></button>
       </div>
     </div>
 
+    <!-- Archive Entry 2 -->
+    <div class="archive-item">
+      <div class="archive-left">
+        <img src="static/icons/file.png" alt="File icon">
+        <div class="archive-details">
+          <span class="archive-title">Supervisor Report - November 12, 2025</span>
+          <span class="archive-date">Generated 2025-11-12, 17:05</span>
+        </div>
+      </div>
+      <div class="archive-right">
+        <button class="preview-btn" onclick="previewArchiveItem(2)">Preview</button>
+        <button class="download-btn" onclick="downloadArchiveItem(2)"><img src="static/icons/download.png" alt="Download"></button>
+      </div>
+    </div>
+
+    <!-- Archive Entry 3 -->
+    <div class="archive-item">
+      <div class="archive-left">
+        <img src="static/icons/file.png" alt="File icon">
+        <div class="archive-details">
+          <span class="archive-title">Weekly Summary - November 4-10, 2025</span>
+          <span class="archive-date">Generated 2025-11-10, 18:00</span>
+        </div>
+      </div>
+      <div class="archive-right">
+        <button class="preview-btn" onclick="previewArchiveItem(3)">Preview</button>
+        <button class="download-btn" onclick="downloadArchiveItem(3)"><img src="static/icons/download.png" alt="Download"></button>
+      </div>
+    </div>
+
+    <!-- Archive Entry 4 -->
+    <div class="archive-item">
+      <div class="archive-left">
+        <img src="static/icons/file.png" alt="File icon">
+        <div class="archive-details">
+          <span class="archive-title">Supervisor Report - November 06, 2025</span>
+          <span class="archive-date">Generated 2025-11-06, 16:45</span>
+        </div>
+      </div>
+      <div class="archive-right">
+        <button class="preview-btn" onclick="previewArchiveItem(4)">Preview</button>
+        <button class="download-btn" onclick="downloadArchiveItem(4)"><img src="static/icons/download.png" alt="Download"></button>
+      </div>
+    </div>
+
+    <!-- Archive Entry 5 -->
+    <div class="archive-item">
+      <div class="archive-left">
+        <img src="static/icons/file.png" alt="File icon">
+        <div class="archive-details">
+          <span class="archive-title">Monthly Report - October 2025</span>
+          <span class="archive-date">Generated 2025-10-31, 20:00</span>
+        </div>
+      </div>
+      <div class="archive-right">
+        <button class="preview-btn" onclick="previewArchiveItem(5)">Preview</button>
+        <button class="download-btn" onclick="downloadArchiveItem(5)"><img src="static/icons/download.png" alt="Download"></button>
+      </div>
+    </div>
+
+    <!-- Pagination -->
     <div class="pagination">
       <button>Previous</button>
-      <span>Page 1 of 6</span>
+      <span>Page 1 of 2</span>
       <button>Next</button>
     </div>
   </div>
 
   <div class="bottom-nav">
-    <a href="dashboard.html" class="nav-item"><img src="static/icons/home.png" alt="Dashboard Icon">Dashboard</a>
-    <a href="archives.html" class="nav-item"><img src="static/icons/archive.png" alt="Archives Icon">Archives</a>
-    <a href="calendar.html" class="nav-item"><img src="static/icons/calendar.png" alt="Calendar Icon">Calendar</a>
-    <a href="login.html" class="nav-item"><img src="static/icons/logout.png" alt="Logout Icon">Log Out</a>
+    <a href="dashboard.html" class="nav-item">
+      <img src="static/icons/home.png" alt="Dashboard Icon"> Dashboard
+    </a>
+    <a href="archives.html" class="nav-item active">
+      <img src="static/icons/archive.png" alt="Archives Icon"> Archives
+    </a>
+    <a href="calendar.html" class="nav-item">
+      <img src="static/icons/calendar.png" alt="Calendar Icon"> Calendar
+    </a>
+    <a href="login.html" class="nav-item">
+      <img src="static/icons/logout.png" alt="Logout Icon"> Log Out
+    </a>
   </div>
 
   <script src="static/js/script.js"></script>

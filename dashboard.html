@@ -6,23 +6,53 @@
   <title>Dashboard - University of South Carolina</title>
   <link rel="stylesheet" href="static/css/themes.css">
   <link rel="stylesheet" href="static/css/style.css">
+  <script>
+    // Auto cache-busting for development
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      const timestamp = new Date().getTime();
+      document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
+        link.href += '?v=' + timestamp;
+      });
+    }
+  </script>
 </head>
 <body>
   <div class="dashboard-container">
     <h1>Welcome Back Manager Jerry Rivers</h1>
 
+    <!-- Category Cards Section -->
     <div class="quick-links">
-      <div class="quick-card">
-        <button class="top-btn" data-modal="modal-key" aria-haspopup="dialog" aria-controls="modal-key">Key Issues</button>
-        <button class="bottom-btn" type="button">25 <br> Total Items</button>
+      <div class="quick-card" data-category="issues">
+        <button class="category-btn">
+          <div class="category-title">Key Issues</div>
+          <div class="category-count">6</div>
+          <div class="category-label">Total Items</div>
+        </button>
       </div>
-      <div class="quick-card">
-        <button class="top-btn" data-modal="modal-perf" aria-haspopup="dialog" aria-controls="modal-perf">Performance</button>
-        <button class="bottom-btn" type="button">16 <br> Total Items</button>
+      <div class="quick-card" data-category="performance">
+        <button class="category-btn">
+          <div class="category-title">Performance</div>
+          <div class="category-count">16</div>
+          <div class="category-label">Total Items</div>
+        </button>
       </div>
-      <div class="quick-card">
-        <button class="top-btn" data-modal="modal-prior" aria-haspopup="dialog" aria-controls="modal-prior">Priorities</button>
-        <button class="bottom-btn" type="button">6 <br> Total Items</button>
+      <div class="quick-card" data-category="priorities">
+        <button class="category-btn">
+          <div class="category-title">Priorities</div>
+          <div class="category-count">8</div>
+          <div class="category-label">Total Items</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Details Section (shows content based on selected card) -->
+    <div class="details-section" id="detailsSection">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 id="detailsTitle">Key Issues</h3>
+        <button id="refreshIssuesBtn" class="clear-chat-btn" title="Refresh issues from API" style="font-size: 12px; padding: 4px 10px;">Refresh Data</button>
+      </div>
+      <div class="details-content" id="detailsContent">
+        <!-- Content will be dynamically loaded here -->
       </div>
     </div>
 
@@ -52,7 +82,10 @@
 
     <!-- AI Chat Section -->
     <div class="ai-chat-section" role="region" aria-label="AI Assistant Chat">
-      <h3>Ask AI About Metrics</h3>
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3>Ask AI About Metrics</h3>
+        <button id="clearChatBtn" class="clear-chat-btn">Clear Chat</button>
+      </div>
       <div class="chat-messages" id="chatMessages">
         <div class="chat-message ai-message">
           <strong>AI Assistant:</strong> Hi! I can help you analyze dashboard metrics. Ask me anything about your performance data.
@@ -63,39 +96,45 @@
         <button id="chatSendBtn" class="chat-send-btn">Send</button>
       </div>
     </div>
-  </div>
 
-  <div id="modal-key" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modal-key-title">
-    <div class="modal-content">
-      <h2 id="modal-key-title">Key Issues</h2>
-      <p>Placeholder for Key Issues details. Later this will display a summary or table.</p>
-      <button class="close-btn" aria-label="Close Key Issues">Close</button>
+    <!-- Work Order Details Modal -->
+    <div id="workOrderModal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modal-work-order-title">
+      <div class="modal-content work-order-modal">
+        <div class="modal-header">
+          <h2 id="modal-work-order-title">Work Order Details</h2>
+          <button class="close-btn" aria-label="Close Work Order Details">&times;</button>
+        </div>
+        <div class="modal-body">
+          <pre id="workOrderJson" class="json-display"></pre>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div id="modal-perf" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modal-perf-title">
-    <div class="modal-content">
-      <h2 id="modal-perf-title">Performance</h2>
-      <p>Placeholder for Performance details.</p>
-      <button class="close-btn" aria-label="Close Performance">Close</button>
-    </div>
-  </div>
-
-  <div id="modal-prior" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modal-prior-title">
-    <div class="modal-content">
-      <h2 id="modal-prior-title">Priorities</h2>
-      <p>Placeholder for Priorities details.</p>
-      <button class="close-btn" aria-label="Close Priorities">Close</button>
-    </div>
-  </div>
-
+  <!-- Bottom Navigation -->
   <div class="bottom-nav">
-    <a href="dashboard.html" class="nav-item"><img src="static/icons/home.png" alt="Dashboard Icon">Dashboard</a>
-    <a href="archives.html" class="nav-item"><img src="static/icons/archive.png" alt="Archives Icon">Archives</a>
-    <a href="calendar.html" class="nav-item"><img src="static/icons/calendar.png" alt="Calendar Icon">Calendar</a>
-    <a href="login.html" class="nav-item"><img src="static/icons/logout.png" alt="Logout Icon">Log Out</a>
+    <a href="dashboard.html" class="nav-item active">
+      <img src="static/icons/home.png" alt="Dashboard Icon"> Dashboard
+    </a>
+    <a href="archives.html" class="nav-item">
+      <img src="static/icons/archive.png" alt="Archives Icon"> Archives
+    </a>
+    <a href="calendar.html" class="nav-item">
+      <img src="static/icons/calendar.png" alt="Calendar Icon"> Calendar
+    </a>
+    <a href="login.html" class="nav-item">
+      <img src="static/icons/logout.png" alt="Logout Icon"> Log Out
+    </a>
   </div>
 
   <script src="static/js/script.js"></script>
+  <script>
+    // Auto cache-bust JS file in development
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      const timestamp = new Date().getTime();
+      const lastScript = document.scripts[document.scripts.length - 2]; // Get the script.js element
+      lastScript.src = lastScript.src.split('?')[0] + '?v=' + timestamp;
+    }
+  </script>
 </body>
 </html>

@@ -1,8 +1,243 @@
 /* ======================================
+   MOCK DATA - Simulating API responses for GitHub Pages
+====================================== */
+
+const MOCK_DATA = {
+  keyIssues: [
+    {
+      title: "HVAC System Failure - Science Building",
+      priority: "EMERGENCY",
+      date: "Nov 14, 2025",
+      workOrderNumber: "WO-2025-1143",
+      fullData: {
+        workOrderNumber: "WO-2025-1143",
+        priority: "EMERGENCY",
+        status: "ASSIGNED",
+        building: "Science and Technology Building",
+        location: "Floor 3 - Lab Wing",
+        problem: "Complete HVAC failure causing temperature to rise above safe limits",
+        assignedShop: "Temperature/HVAC",
+        createdDate: "2025-11-14T08:30:00",
+        assignedTo: "Team Alpha"
+      }
+    },
+    {
+      title: "Water Leak - Library",
+      priority: "URGENT",
+      date: "Nov 14, 2025",
+      workOrderNumber: "WO-2025-1145",
+      fullData: {
+        workOrderNumber: "WO-2025-1145",
+        priority: "URGENT",
+        status: "WORK IN PROGRESS",
+        building: "Thomas Cooper Library",
+        location: "3rd Floor Restroom",
+        problem: "Ceiling water leak affecting reading area",
+        assignedShop: "Plumbing",
+        createdDate: "2025-11-14T09:15:00",
+        assignedTo: "Team Beta"
+      }
+    },
+    {
+      title: "Elevator Out of Service - Russell House",
+      priority: "URGENT",
+      date: "Nov 13, 2025",
+      workOrderNumber: "WO-2025-1138",
+      fullData: {
+        workOrderNumber: "WO-2025-1138",
+        priority: "URGENT",
+        status: "WORK IN PROGRESS",
+        building: "Russell House",
+        location: "Main Elevator Bank",
+        problem: "Elevator #2 stuck between floors",
+        assignedShop: "Elevators & Escalators",
+        createdDate: "2025-11-13T14:22:00",
+        assignedTo: "Team Gamma"
+      }
+    },
+    {
+      title: "Electrical Panel Overheating - Darla Moore",
+      priority: "EMERGENCY",
+      date: "Nov 13, 2025",
+      workOrderNumber: "WO-2025-1135",
+      fullData: {
+        workOrderNumber: "WO-2025-1135",
+        priority: "EMERGENCY",
+        status: "SHOP DONE",
+        building: "Darla Moore School of Business",
+        location: "Basement - Electrical Room",
+        problem: "Main electrical panel showing signs of overheating",
+        assignedShop: "Electrical & Lighting",
+        createdDate: "2025-11-13T11:05:00",
+        assignedTo: "Team Delta"
+      }
+    },
+    {
+      title: "Broken Entry Door Lock - Capstone",
+      priority: "PROMPT",
+      date: "Nov 12, 2025",
+      workOrderNumber: "WO-2025-1129",
+      fullData: {
+        workOrderNumber: "WO-2025-1129",
+        priority: "PROMPT",
+        status: "NEW",
+        building: "Capstone",
+        location: "Main Entrance",
+        problem: "Security lock mechanism not engaging properly",
+        assignedShop: "Access Control",
+        createdDate: "2025-11-12T16:30:00",
+        assignedTo: "Unassigned"
+      }
+    },
+    {
+      title: "Classroom Lighting Issues - Swearingen",
+      priority: "ROUTINE",
+      date: "Nov 12, 2025",
+      workOrderNumber: "WO-2025-1122",
+      fullData: {
+        workOrderNumber: "WO-2025-1122",
+        priority: "ROUTINE",
+        status: "ASSIGNED",
+        building: "Swearingen Engineering Center",
+        location: "Room 2A15",
+        problem: "Half of classroom lights not functioning",
+        assignedShop: "Electrical & Lighting",
+        createdDate: "2025-11-12T10:20:00",
+        assignedTo: "Team Echo"
+      }
+    },
+    {
+      title: "Sidewalk Damage - Horseshoe Area",
+      priority: "PROMPT",
+      date: "Nov 11, 2025",
+      workOrderNumber: "WO-2025-1115",
+      fullData: {
+        workOrderNumber: "WO-2025-1115",
+        priority: "PROMPT",
+        status: "WORK IN PROGRESS",
+        building: "Horseshoe - Outdoor",
+        location: "Main Walkway near Rutledge",
+        problem: "Large crack in sidewalk creating tripping hazard",
+        assignedShop: "Grounds",
+        createdDate: "2025-11-11T13:45:00",
+        assignedTo: "Team Zeta"
+      }
+    },
+    {
+      title: "Fire Alarm System Malfunction - Bates",
+      priority: "URGENT",
+      date: "Nov 11, 2025",
+      workOrderNumber: "WO-2025-1110",
+      fullData: {
+        workOrderNumber: "WO-2025-1110",
+        priority: "URGENT",
+        status: "AWAITING",
+        building: "Bates House",
+        location: "2nd Floor North Wing",
+        problem: "Fire alarm pulling randomly without trigger",
+        assignedShop: "Access Control",
+        createdDate: "2025-11-11T08:00:00",
+        assignedTo: "Team Eta"
+      }
+    },
+    {
+      title: "Broken Window - Patterson Hall",
+      priority: "COORDINATED",
+      date: "Nov 10, 2025",
+      workOrderNumber: "WO-2025-1098",
+      fullData: {
+        workOrderNumber: "WO-2025-1098",
+        priority: "COORDINATED",
+        status: "RESCHEDULED",
+        building: "Patterson Hall",
+        location: "Room 412",
+        problem: "Window pane cracked, needs replacement",
+        assignedShop: "Carpentry & Building Repairs",
+        createdDate: "2025-11-10T15:30:00",
+        assignedTo: "Team Theta"
+      }
+    },
+    {
+      title: "Pest Control Request - McClintock",
+      priority: "ROUTINE",
+      date: "Nov 10, 2025",
+      workOrderNumber: "WO-2025-1093",
+      fullData: {
+        workOrderNumber: "WO-2025-1093",
+        priority: "ROUTINE",
+        status: "NEW",
+        building: "McClintock at Women's Quad",
+        location: "1st Floor Common Area",
+        problem: "Multiple reports of insects in common areas",
+        assignedShop: "Pest",
+        createdDate: "2025-11-10T09:00:00",
+        assignedTo: "Unassigned"
+      }
+    }
+  ],
+  
+  emergencyStats: {
+    today: 3,
+    week: 12,
+    date: "2025-11-14",
+    week_start: "2025-11-11"
+  },
+  
+  chatHistory: [
+    {
+      role: "user",
+      content: "How many emergency work orders do we have today?"
+    },
+    {
+      role: "assistant",
+      content: "Based on the current data, there are 3 emergency work orders today (November 14, 2025). This includes issues such as HVAC system failures and electrical panel overheating."
+    }
+  ],
+  
+  archiveReports: [
+    {
+      id: 1,
+      title: "Supervisor Report - November 13, 2025",
+      date: "2025-11-13",
+      generated: "2025-11-13T16:30:00",
+      filename: "report_20251113.pdf"
+    },
+    {
+      id: 2,
+      title: "Supervisor Report - November 12, 2025",
+      date: "2025-11-12",
+      generated: "2025-11-12T17:05:00",
+      filename: "report_20251112.pdf"
+    },
+    {
+      id: 3,
+      title: "Weekly Summary - November 4-10, 2025",
+      date: "2025-11-10",
+      generated: "2025-11-10T18:00:00",
+      filename: "weekly_report_20251110.pdf"
+    },
+    {
+      id: 4,
+      title: "Supervisor Report - November 06, 2025",
+      date: "2025-11-06",
+      generated: "2025-11-06T16:45:00",
+      filename: "report_20251106.pdf"
+    },
+    {
+      id: 5,
+      title: "Monthly Report - October 2025",
+      date: "2025-10-31",
+      generated: "2025-10-31T20:00:00",
+      filename: "monthly_report_202510.pdf"
+    }
+  ]
+};
+
+/* ======================================
    Global Utility Functions
 ====================================== */
 
-// Helper: Get CSRF token for secure POSTs
+// Helper: Get CSRF token for secure POSTs (not needed for static site but kept for structure)
 function getCSRFToken() {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; csrftoken=`);
@@ -16,25 +251,67 @@ function handleError(message) {
   alert("An error occurred: " + message);
 }
 
-// Placeholder: Generic fetch wrapper for backend calls
+// Mock API request - returns mock data instead of making real API calls
 async function apiRequest(url, method = "GET", body = null) {
-  const headers = {
-    "Content-Type": "application/json",
-    "X-CSRFToken": getCSRFToken(),
-  };
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      // Simulate API responses with mock data
+      if (url.includes('/api/dashboard-stats/')) {
+        resolve(MOCK_DATA.emergencyStats);
+      } else if (url.includes('/api/dashboard-issues/')) {
+        resolve({
+          issues: MOCK_DATA.keyIssues,
+          count: MOCK_DATA.keyIssues.length
+        });
+      } else if (url.includes('/api/dashboard-chat/')) {
+        if (method === 'GET') {
+          resolve({
+            history: MOCK_DATA.chatHistory
+          });
+        } else if (method === 'POST') {
+          if (body && body.clear_history) {
+            MOCK_DATA.chatHistory = [];
+            resolve({ success: true });
+          } else if (body && body.message) {
+            // Simulate AI response
+            const response = generateMockChatResponse(body.message);
+            MOCK_DATA.chatHistory.push({
+              role: "user",
+              content: body.message
+            });
+            MOCK_DATA.chatHistory.push({
+              role: "assistant",
+              content: response
+            });
+            resolve({
+              reply: response,
+              records_found: Math.floor(Math.random() * 50) + 20
+            });
+          }
+        }
+      }
+    }, 300); // Simulate network delay
+  });
+}
 
-  try {
-    const response = await fetch(url, {
-      method,
-      headers,
-      body: body ? JSON.stringify(body) : null,
-    });
-
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return await response.json();
-  } catch (error) {
-    handleError(error.message);
-    return null;
+// Generate mock AI chat responses
+function generateMockChatResponse(message) {
+  const lowerMsg = message.toLowerCase();
+  
+  if (lowerMsg.includes('emergency') || lowerMsg.includes('urgent')) {
+    return "Based on recent data, we currently have 3 emergency tickets today and 12 for the week. The main issues involve HVAC failures and electrical problems. Response times have averaged 18 minutes, which is within our target range.";
+  } else if (lowerMsg.includes('hvac') || lowerMsg.includes('temperature')) {
+    return "HVAC-related work orders show an increase this week. The most critical is the Science Building HVAC failure (WO-2025-1143) which is currently assigned and being addressed. We've had 8 HVAC tickets this month with an average resolution time of 4.2 hours.";
+  } else if (lowerMsg.includes('building') || lowerMsg.includes('location')) {
+    return "The most active buildings this week are: Thomas Cooper Library (5 tickets), Russell House (4 tickets), and Science & Technology Building (3 tickets). Most issues are related to HVAC and plumbing systems.";
+  } else if (lowerMsg.includes('performance') || lowerMsg.includes('metrics')) {
+    return "Current performance metrics show: 94% work order completion rate, 2.3 hour average resolution time (down 15% from last month), and 4.6/5 customer satisfaction rating. Emergency response time averages 18 minutes.";
+  } else if (lowerMsg.includes('priority')) {
+    return "Work order breakdown by priority: Emergency (12%), Urgent (28%), Prompt (25%), Routine (30%), Coordinated (3%), Administrative (2%). Emergency response compliance is at 98%.";
+  } else if (lowerMsg.includes('shop') || lowerMsg.includes('team')) {
+    return "Shop performance this week: HVAC has the highest ticket volume (18), followed by Electrical (15) and Plumbing (12). Team Alpha leads in completion rate at 96%, with Team Beta close behind at 94%.";
+  } else {
+    return "I've analyzed the dashboard data. We're currently tracking " + MOCK_DATA.keyIssues.length + " key issues, with strong performance metrics overall. Is there a specific aspect you'd like me to focus on - work order priorities, building-specific issues, shop performance, or response times?";
   }
 }
 
@@ -42,98 +319,111 @@ async function apiRequest(url, method = "GET", body = null) {
    Auth Functions (Login / Signup / Password Reset)
 ====================================== */
 
-// Placeholder for login logic
+// Login form handling
 function handleLoginSubmit(e) {
-  e.preventDefault();
-  console.log("Login form submitted. TODO: add authentication logic here.");
+  // Form action will navigate to dashboard.html
+  // No prevent default needed for static site
+  console.log("Login form submitted - navigating to dashboard");
 }
 
-// Placeholder for signup logic
+// Signup form handling
 function handleSignupSubmit(e) {
   e.preventDefault();
-  console.log("Signup form submitted. TODO: add user registration logic here.");
+  alert("Account created successfully! Redirecting to login...");
+  setTimeout(() => {
+    window.location.href = "login.html";
+  }, 500);
 }
 
-// Placeholder for forgot password flow
+// Forgot password flow
 function handleForgotPassword(e) {
   e.preventDefault();
-  console.log("Forgot password triggered. TODO: send password reset email.");
+  alert("Reset code sent to your email! Redirecting to verification...");
+  setTimeout(() => {
+    window.location.href = "enter_otp.html";
+  }, 500);
 }
 
-// Placeholder for reset password confirmation
+// Reset password confirmation
 function handleResetPassword(e) {
   e.preventDefault();
-  console.log("Reset password submitted. TODO: update password on server.");
+  alert("Password reset successfully! Redirecting to login...");
+  setTimeout(() => {
+    window.location.href = "login.html";
+  }, 500);
 }
 
 /* ======================================
    Dashboard Functions
 ====================================== */
 
-// Open modal placeholder (used on dashboard)
+// Open modal
 function openDashboardModal(id) {
   const modal = typeof id === "string" ? document.getElementById(id) : id;
   if (!modal) return;
   modal.setAttribute("aria-hidden", "false");
-  // focus the first focusable element inside the modal
   const focusable = modal.querySelector(
     'button, [href], input, textarea, [tabindex]:not([tabindex="-1"])'
   );
   if (focusable) focusable.focus();
-  console.log(`Dashboard modal '${id}' opened.`);
 }
 
-// Close modal placeholder
+// Close modal
 function closeDashboardModal(id) {
   const modal = typeof id === "string" ? document.getElementById(id) : id;
   if (!modal) return;
   modal.setAttribute("aria-hidden", "true");
-  console.log(`Dashboard modal '${id}' closed.`);
 }
 
-// Fetch and update emergency ticket counts
+// Fetch and update emergency ticket counts (using mock data)
 function updateDashboardStats() {
-  console.log("Dashboard stats - using placeholder data for GitHub Pages demo");
+  console.log("Fetching emergency ticket stats...");
   
   const todayElement = document.getElementById('emergencyToday');
   const weekElement = document.getElementById('emergencyWeek');
   const todayDateElement = document.getElementById('todayDate');
   const weekDateRangeElement = document.getElementById('weekDateRange');
   
-  // Only update if we're on the dashboard page
   if (!todayElement || !weekElement) {
     return;
   }
   
-  // For GitHub Pages demo, use placeholder data
-  // In production with Django backend, this would fetch from '/api/dashboard-stats/'
-  const today = new Date();
-  const weekStart = new Date(today);
-  weekStart.setDate(today.getDate() - 6);
-  
-  const todayFormatted = formatDate(today.toISOString().split('T')[0]);
-  const weekStartFormatted = formatDate(weekStart.toISOString().split('T')[0]);
-  const weekEndFormatted = todayFormatted;
-  
-  // Placeholder data
-  todayElement.innerHTML = `<span class="count-number">-</span>`;
-  weekElement.innerHTML = `<span class="count-number">-</span>`;
-  
-  if (todayDateElement) {
-    todayDateElement.textContent = todayFormatted;
-  }
-  if (weekDateRangeElement) {
-    weekDateRangeElement.textContent = `${weekStartFormatted} - ${weekEndFormatted}`;
-  }
-  
-  console.log('Dashboard stats updated with placeholder data (backend API required for live data)');
+  apiRequest('/api/dashboard-stats/', 'GET')
+    .then(data => {
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      
+      const todayFormatted = formatDate(data.date);
+      const weekStartFormatted = formatDate(data.week_start);
+      const weekEndFormatted = formatDate(data.date);
+      
+      todayElement.innerHTML = `<span class="count-number">${data.today}</span>`;
+      weekElement.innerHTML = `<span class="count-number">${data.week}</span>`;
+      
+      if (todayDateElement) {
+        todayDateElement.textContent = todayFormatted;
+      }
+      if (weekDateRangeElement) {
+        weekDateRangeElement.textContent = `${weekStartFormatted} - ${weekEndFormatted}`;
+      }
+      
+      console.log(`Updated stats: Today=${data.today}, Week=${data.week}`);
+    })
+    .catch(error => {
+      console.error('Error fetching dashboard stats:', error);
+      todayElement.innerHTML = '<span class="error-text">Error</span>';
+      weekElement.innerHTML = '<span class="error-text">Error</span>';
+      if (todayDateElement) todayDateElement.textContent = '';
+      if (weekDateRangeElement) weekDateRangeElement.textContent = '';
+    });
 }
 
 // Helper function to format date strings
 function formatDate(dateString) {
   if (!dateString) return '';
   
-  const date = new Date(dateString + 'T00:00:00'); // Add time to avoid timezone issues
+  const date = new Date(dateString + 'T00:00:00');
   const options = { month: 'short', day: 'numeric', year: 'numeric' };
   return date.toLocaleDateString('en-US', options);
 }
@@ -142,12 +432,12 @@ function formatDate(dateString) {
    Calendar Functions
 ====================================== */
 
-// Placeholder for fetching calendar data (tasks/events)
+// Placeholder for fetching calendar data
 function loadCalendarData() {
-  console.log("Loading calendar data... TODO: fetch events from backend.");
+  console.log("Calendar data loaded (mock mode)");
 }
 
-// Placeholder for saving AI prompt and date range
+// Generate report
 function generateReport() {
   console.log("Generating report...");
   const prompt = document.getElementById("aiPrompt")?.value || "";
@@ -156,93 +446,243 @@ function generateReport() {
   ).map((td) => td.textContent.trim());
   console.log("Selected dates:", selectedDates);
   console.log("AI Prompt:", prompt);
-  // TODO: POST this info to Django to generate a report
-}
-
-// Placeholder for date cell click handling
-function handleDateSelection() {
-  console.log("Calendar date clicked. TODO: highlight date or range.");
+  alert(`Report generated for ${selectedDates.length} days!\n\nPrompt: "${prompt || 'No prompt specified'}"\n\nThis would normally generate a detailed supervisor report.`);
 }
 
 /* ======================================
-   Inline JS consolidation: initialize per-page interactions
-   These were previously embedded in templates — moved here for centralization.
+   Dashboard Card Selection
 ====================================== */
 
-// Dashboard modal behaviors (click outside to close, ESC handling)
-function initDashboardModals() {
-  const topButtons = document.querySelectorAll('.top-btn[data-modal]');
-  const closeButtons = document.querySelectorAll('.close-btn');
-  const modals = document.querySelectorAll('.modal');
+function initDashboardCards() {
+  const cards = document.querySelectorAll('.quick-card');
+  const detailsTitle = document.getElementById('detailsTitle');
+  const detailsContent = document.getElementById('detailsContent');
 
-  topButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const id = btn.getAttribute('data-modal');
-      const modal = document.getElementById(id);
-      if (modal) openDashboardModal(modal);
-    });
-  });
+  // Data storage
+  const data = {
+    issues: MOCK_DATA.keyIssues,
+    performance: [
+      { title: 'Avg ticket resolution time', value: '2.3 hours', trend: '-15%' },
+      { title: 'Work order completion rate', value: '94%', trend: '+3%' },
+      { title: 'Emergency response time', value: '18 min', trend: '-5%' },
+      { title: 'Customer satisfaction', value: '4.6/5', trend: '+0.2' },
+      { title: 'Maintenance backlog', value: '12 items', trend: '-8' },
+      { title: 'First-time fix rate', value: '87%', trend: '+4%' },
+      { title: 'Preventive maintenance compliance', value: '91%', trend: '+2%' },
+      { title: 'Average cost per ticket', value: '$285', trend: '-10%' },
+      { title: 'Technician utilization', value: '89%', trend: '+5%' },
+      { title: 'Parts availability', value: '96%', trend: '+1%' },
+      { title: 'Equipment downtime', value: '2.1 hrs', trend: '-12%' },
+      { title: 'Safety incident rate', value: '0.3%', trend: '-0.1%' },
+      { title: 'Energy efficiency score', value: '88/100', trend: '+3' },
+      { title: 'Asset reliability', value: '94%', trend: '+2%' },
+      { title: 'Vendor response time', value: '3.2 hrs', trend: '-8%' },
+      { title: 'Overtime hours', value: '45 hrs', trend: '-12%' },
+    ],
+    priorities: [
+      { title: 'Annual HVAC inspection', status: 'In Progress', eta: '2 days' },
+      { title: 'Fire safety system upgrade', status: 'Scheduled', eta: '1 week' },
+      { title: 'Parking lot resurfacing', status: 'Not Started', eta: '2 weeks' },
+      { title: 'Building roof repairs', status: 'In Review', eta: '3 days' },
+      { title: 'Security system update', status: 'Pending Approval', eta: '5 days' },
+      { title: 'Elevator modernization project', status: 'Planning', eta: '1 month' },
+    ]
+  };
 
-  closeButtons.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      const modal = e.target.closest('.modal');
-      if (modal) closeDashboardModal(modal);
-    });
-  });
-
-  // click outside to close
-  window.addEventListener('click', (e) => {
-    modals.forEach((m) => {
-      if (e.target === m) closeDashboardModal(m);
-    });
-  });
-
-  // ESC to close
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      modals.forEach((m) => closeDashboardModal(m));
+  // Load key issues on initialization
+  async function loadKeyIssues() {
+    console.log('[DEBUG] Loading key issues (mock data)...');
+    
+    // Update the count in the card
+    const issuesCard = document.querySelector('[data-category="issues"] .category-count');
+    if (issuesCard) {
+      issuesCard.textContent = data.issues.length;
     }
+    
+    // Refresh display if issues category is selected
+    const selectedCard = document.querySelector('.quick-card.selected');
+    if (selectedCard && selectedCard.getAttribute('data-category') === 'issues') {
+      renderDetails('issues');
+    }
+  }
+
+  function renderDetails(category) {
+    let html = '';
+    
+    if (category === 'issues') {
+      detailsTitle.textContent = 'Key Issues';
+      
+      data.issues.forEach((item, index) => {
+        html += `
+          <div class="detail-item" data-issue-index="${index}" onclick="showWorkOrderDetails(${index})">
+            <div class="title">${item.title}</div>
+            <div class="info">${item.priority} • ${item.date} • WO# ${item.workOrderNumber}</div>
+          </div>
+        `;
+      });
+    } else if (category === 'performance') {
+      detailsTitle.textContent = 'Performance Metrics';
+      data.performance.forEach(item => {
+        html += `
+          <div class="detail-item">
+            <div class="title">${item.title}</div>
+            <div class="info">${item.value} (${item.trend})</div>
+          </div>
+        `;
+      });
+    } else if (category === 'priorities') {
+      detailsTitle.textContent = 'Current Priorities';
+      data.priorities.forEach(item => {
+        html += `
+          <div class="detail-item">
+            <div class="title">${item.title}</div>
+            <div class="info">${item.status} • ETA: ${item.eta}</div>
+          </div>
+        `;
+      });
+    }
+    
+    detailsContent.innerHTML = html;
+  }
+
+  // Handle card clicks
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      cards.forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      const category = card.getAttribute('data-category');
+      renderDetails(category);
+    });
   });
+
+  // Initialize with first card selected
+  if (cards.length > 0) {
+    cards[0].classList.add('selected');
+    renderDetails('issues');
+  }
+  
+  // Load key issues
+  loadKeyIssues();
+  
+  // Make data accessible globally for modal
+  window.dashboardData = data;
+  
+  // Refresh button handler
+  const refreshBtn = document.getElementById('refreshIssuesBtn');
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', async () => {
+      refreshBtn.disabled = true;
+      refreshBtn.textContent = 'Refreshing...';
+      
+      // Simulate refresh with slight delay
+      setTimeout(() => {
+        alert('Data refreshed! (Mock data remains the same for demo)');
+        refreshBtn.textContent = 'Refresh Data';
+        refreshBtn.disabled = false;
+      }, 800);
+    });
+  }
 }
 
-// Dashboard AI Chat functionality
+// Function to show work order details in modal
+function showWorkOrderDetails(index) {
+  const data = window.dashboardData;
+  if (!data || !data.issues || !data.issues[index]) {
+    console.error('No work order data found for index:', index);
+    return;
+  }
+  
+  const issue = data.issues[index];
+  const fullData = issue.fullData;
+  
+  if (!fullData) {
+    alert('Full work order data not available');
+    return;
+  }
+  
+  const modal = document.getElementById('workOrderModal');
+  const jsonDisplay = document.getElementById('workOrderJson');
+  const closeBtn = modal.querySelector('.close-btn');
+  
+  jsonDisplay.textContent = JSON.stringify(fullData, null, 2);
+  modal.setAttribute('aria-hidden', 'false');
+  
+  closeBtn.onclick = () => {
+    modal.setAttribute('aria-hidden', 'true');
+  };
+  
+  modal.onclick = (e) => {
+    if (e.target === modal) {
+      modal.setAttribute('aria-hidden', 'true');
+    }
+  };
+  
+  const escHandler = (e) => {
+    if (e.key === 'Escape') {
+      modal.setAttribute('aria-hidden', 'true');
+      document.removeEventListener('keydown', escHandler);
+    }
+  };
+  document.addEventListener('keydown', escHandler);
+}
+
+/* ======================================
+   Dashboard AI Chat
+====================================== */
+
 function initDashboardChat() {
   const chatInput = document.getElementById('chatInput');
   const chatSendBtn = document.getElementById('chatSendBtn');
   const chatMessages = document.getElementById('chatMessages');
+  const clearChatBtn = document.getElementById('clearChatBtn');
 
   if (!chatInput || !chatSendBtn || !chatMessages) return;
 
   // Store conversation history
-  const conversationHistory = [];
+  let conversationHistory = [];
+
+  // Load conversation history (from mock data)
+  async function loadChatHistory() {
+    console.log('[DEBUG] Loading chat history (mock)...');
+    
+    if (MOCK_DATA.chatHistory && MOCK_DATA.chatHistory.length > 0) {
+      conversationHistory = MOCK_DATA.chatHistory;
+      chatMessages.innerHTML = '';
+      
+      MOCK_DATA.chatHistory.forEach(msg => {
+        if (msg.role === 'user') {
+          const userDiv = document.createElement('div');
+          userDiv.className = 'chat-message user-message';
+          userDiv.innerHTML = `<strong>You:</strong> ${msg.content}`;
+          chatMessages.appendChild(userDiv);
+        } else if (msg.role === 'assistant') {
+          const aiDiv = document.createElement('div');
+          aiDiv.className = 'chat-message ai-message';
+          aiDiv.innerHTML = `<strong>AI Assistant:</strong> ${msg.content}`;
+          chatMessages.appendChild(aiDiv);
+        }
+      });
+      
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+  }
+
+  loadChatHistory();
 
   async function sendMessage() {
     const userMessage = chatInput.value.trim();
     if (!userMessage) return;
 
-    // Add user message to history
-    conversationHistory.push({
-      role: 'user',
-      content: userMessage
-    });
-
-    // Add user message to UI
     const userDiv = document.createElement('div');
     userDiv.className = 'chat-message user-message';
     userDiv.innerHTML = `<strong>You:</strong> ${userMessage}`;
     chatMessages.appendChild(userDiv);
 
-    // Clear input
     chatInput.value = '';
-    
-    // Disable send button while processing
     chatSendBtn.disabled = true;
     chatSendBtn.textContent = 'Thinking...';
-
-    // Scroll to bottom
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
-    // Show typing indicator
     const typingDiv = document.createElement('div');
     typingDiv.className = 'chat-message ai-message typing-indicator';
     typingDiv.innerHTML = `<strong>AI Assistant:</strong> <em>Analyzing data...</em>`;
@@ -250,44 +690,14 @@ function initDashboardChat() {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
     try {
-      // NOTE: This is a demo version for GitHub Pages
-      // In production with Django backend, uncomment the following:
-      /*
       const response = await apiRequest('/api/dashboard-chat/', 'POST', {
         message: userMessage,
         history: conversationHistory
       });
-      */
-      
-      // For demo purposes, show a placeholder response
-      setTimeout(() => {
-        // Remove typing indicator
-        typingDiv.remove();
-        
-        // Show demo message
-        const aiDiv = document.createElement('div');
-        aiDiv.className = 'chat-message ai-message';
-        aiDiv.innerHTML = `<strong>AI Assistant:</strong> This is a demo version. The AI chat feature requires a Django backend with Gemini AI integration. In production, I can analyze work orders, provide metrics, and answer questions about your facilities data.`;
-        chatMessages.appendChild(aiDiv);
-        
-        // Re-enable send button
-        chatSendBtn.disabled = false;
-        chatSendBtn.textContent = 'Send';
-        
-        // Scroll to bottom
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-      }, 1000);
-      
-      return; // Exit early for demo
-      
-      /* Production code would continue here:
-      if (response && response.reply) {
-        conversationHistory.push({
-          role: 'assistant',
-          content: response.reply,
-          data: response.data || []
-        });
 
+      typingDiv.remove();
+
+      if (response && response.reply) {
         const aiDiv = document.createElement('div');
         aiDiv.className = 'chat-message ai-message';
         aiDiv.innerHTML = `<strong>AI Assistant:</strong> ${response.reply}`;
@@ -300,26 +710,18 @@ function initDashboardChat() {
         }
         
         chatMessages.appendChild(aiDiv);
-      } else {
-        throw new Error('Invalid response from server');
       }
-      */
     } catch (error) {
-      // Remove typing indicator
       typingDiv.remove();
       
-      // Show error message
       const errorDiv = document.createElement('div');
       errorDiv.className = 'chat-message ai-message error';
-      errorDiv.innerHTML = `<strong>AI Assistant:</strong> Sorry, I encountered an error processing your request. Please try again.`;
+      errorDiv.innerHTML = `<strong>AI Assistant:</strong> Sorry, I encountered an error. Please try again.`;
       chatMessages.appendChild(errorDiv);
       console.error('Chat error:', error);
     } finally {
-      // Re-enable send button
       chatSendBtn.disabled = false;
       chatSendBtn.textContent = 'Send';
-      
-      // Scroll to bottom
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
   }
@@ -331,10 +733,31 @@ function initDashboardChat() {
       sendMessage();
     }
   });
+
+  if (clearChatBtn) {
+    clearChatBtn.addEventListener('click', async () => {
+      if (!confirm('Are you sure you want to clear the conversation history?')) {
+        return;
+      }
+
+      MOCK_DATA.chatHistory = [];
+      conversationHistory = [];
+
+      chatMessages.innerHTML = `
+        <div class="chat-message ai-message">
+          <strong>AI Assistant:</strong> Hi! I can help you analyze dashboard metrics. Ask me anything about your performance data.
+        </div>
+      `;
+
+      console.log('Chat history cleared');
+    });
+  }
 }
 
+/* ======================================
+   Calendar Interactions
+====================================== */
 
-// Calendar interactions: filtering, selection, and report generation
 function initCalendarInteractions() {
   const filterBtn = document.getElementById('filterToggle');
   const filterOptions = document.getElementById('filterOptions');
@@ -345,7 +768,6 @@ function initCalendarInteractions() {
   if (filterBtn && filterOptions) {
     filterBtn.addEventListener('click', () => {
       filterOptions.classList.toggle('active');
-      // Show first category by default when opening
       if (filterOptions.classList.contains('active')) {
         const firstCategory = document.querySelector('.filter-category');
         if (firstCategory && !document.querySelector('.filter-category.active')) {
@@ -355,24 +777,18 @@ function initCalendarInteractions() {
     });
   }
 
-  // Handle filter category clicks
   const filterCategories = document.querySelectorAll('.filter-category');
   filterCategories.forEach(category => {
     category.addEventListener('click', () => {
       const categoryName = category.dataset.category;
       
-      // Remove active from all categories
       filterCategories.forEach(c => c.classList.remove('active'));
-      
-      // Add active to clicked category
       category.classList.add('active');
       
-      // Hide all sub-options
       document.querySelectorAll('.filter-sub-options').forEach(sub => {
         sub.classList.remove('active');
       });
       
-      // Show corresponding sub-options
       const subPanel = document.querySelector(`.filter-sub-options[data-for="${categoryName}"]`);
       if (subPanel) {
         subPanel.classList.add('active');
@@ -380,26 +796,19 @@ function initCalendarInteractions() {
     });
   });
   
-  // Clear Filters functionality
   if (clearFiltersBtn) {
     clearFiltersBtn.addEventListener('click', () => {
-      // Clear all checkboxes
       document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
-      
-      // Clear search inputs
       document.querySelectorAll('.filter-search-input').forEach(input => input.value = '');
-      
-      // Show all labels
       document.querySelectorAll('.checkbox-group label').forEach(label => {
         label.classList.remove('hidden');
       });
       
       console.log('All filters cleared');
-      applyFilters(); // Re-apply to show all data
+      applyFilters();
     });
   }
   
-  // Autocomplete functionality for building and location filters
   function initFilterSearch(inputId, filterType) {
     const searchInput = document.getElementById(inputId);
     if (!searchInput) return;
@@ -419,7 +828,6 @@ function initCalendarInteractions() {
         const checkboxValue = label.querySelector('input[type="checkbox"]')?.value || '';
         const labelText = label.textContent.toLowerCase().trim();
         
-        // Show/hide based on search match
         if (searchTerm === '' || labelText.includes(searchTerm) || checkboxValue.toLowerCase().includes(searchTerm)) {
           label.classList.remove('hidden');
         } else {
@@ -428,39 +836,31 @@ function initCalendarInteractions() {
       });
     });
     
-    // Clear search when clicking clear filters
     searchInput.addEventListener('focus', () => {
       searchInput.select();
     });
   }
   
-  // Initialize search for building and location filters
   initFilterSearch('buildingSearch', 'building');
   initFilterSearch('locationSearch', 'location');
   
-  // Apply filters function
   const applyFilters = () => {
-    // Get all checked priorities
     const selectedPriorities = Array.from(
       document.querySelectorAll('input[type="checkbox"][name="priority"]:checked')
     ).map(cb => cb.value);
     
-    // Get all checked statuses
     const selectedStatuses = Array.from(
       document.querySelectorAll('input[type="checkbox"][name="status"]:checked')
     ).map(cb => cb.value);
     
-    // Get all checked shops
     const selectedShops = Array.from(
       document.querySelectorAll('input[type="checkbox"][name="shop"]:checked')
     ).map(cb => cb.value);
     
-    // Get all checked buildings
     const selectedBuildings = Array.from(
       document.querySelectorAll('input[type="checkbox"][name="building"]:checked')
     ).map(cb => cb.value);
     
-    // Get all checked locations
     const selectedLocations = Array.from(
       document.querySelectorAll('input[type="checkbox"][name="location"]:checked')
     ).map(cb => cb.value);
@@ -472,11 +872,8 @@ function initCalendarInteractions() {
       buildings: selectedBuildings,
       locations: selectedLocations
     });
-    
-    // TODO: Apply filters to calendar data / fetch filtered work orders
   };
   
-  // Attach change listeners to all checkboxes
   document.querySelectorAll('input[type="checkbox"][name="priority"]').forEach(cb => {
     cb.addEventListener('change', applyFilters);
   });
@@ -493,7 +890,7 @@ function initCalendarInteractions() {
     cb.addEventListener('change', applyFilters);
   });
 
-  if (!table) return; // nothing else to do if calendar table not present
+  if (!table) return;
 
   let isSelecting = false;
   let startCell = null;
@@ -537,14 +934,15 @@ function initCalendarInteractions() {
 
   if (generateBtn) {
     generateBtn.addEventListener('click', () => {
-      const selected = [...table.querySelectorAll('.selected, .range')].map((td) => td.textContent.trim());
-      const prompt = document.getElementById('aiPrompt')?.value.trim() || '';
-      alert(`Generating report for days: ${selected.join(', ') || 'none'}\n\nPrompt: ${prompt || 'No AI input.'}`);
+      generateReport();
     });
   }
 }
 
-// OTP / Enter Code form behaviors
+/* ======================================
+   OTP Form
+====================================== */
+
 function initOTPForm() {
   const form = document.getElementById('otpForm');
   const otpInput = document.getElementById('otpInput');
@@ -554,8 +952,8 @@ function initOTPForm() {
 
   if (resendBtn && otpInput) {
     resendBtn.addEventListener('click', (e) => {
-      // Temporarily disable required validation when clicking Resend
       otpInput.removeAttribute('required');
+      alert('Verification code resent to your email!');
     });
   }
 
@@ -565,6 +963,12 @@ function initOTPForm() {
     if (!isResend && otpInput && otpInput.value.trim() === '') {
       e.preventDefault();
       alert('Please enter your verification code.');
+    } else if (!isResend) {
+      e.preventDefault();
+      alert('Verification successful! Redirecting to reset password...');
+      setTimeout(() => {
+        window.location.href = 'reset_password.html';
+      }, 500);
     }
   });
 }
@@ -573,19 +977,35 @@ function initOTPForm() {
    Archives Functions
 ====================================== */
 
-// Placeholder for loading archived reports
 function loadArchiveList() {
-  console.log("Loading archived reports... TODO: call backend to list files.");
+  console.log("Loading archived reports (mock data)...");
+  // Archives are loaded via HTML on page load
 }
 
-// Placeholder for previewing an archive entry
 function previewArchiveItem(id) {
-  console.log(`Previewing archive item ${id}. TODO: load file preview modal.`);
+  const report = MOCK_DATA.archiveReports.find(r => r.id === id);
+  if (report) {
+    alert(`Previewing: ${report.title}\n\nGenerated: ${formatDateTime(report.generated)}\n\nThis would normally open a preview modal with the report content.`);
+  }
 }
 
-// Placeholder for downloading archive file
 function downloadArchiveItem(id) {
-  console.log(`Downloading archive item ${id}. TODO: trigger file download.`);
+  const report = MOCK_DATA.archiveReports.find(r => r.id === id);
+  if (report) {
+    alert(`Downloading: ${report.filename}\n\nThis would normally trigger a file download.`);
+  }
+}
+
+function formatDateTime(dateTimeString) {
+  const date = new Date(dateTimeString);
+  return date.toLocaleString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true
+  });
 }
 
 /* ======================================
@@ -593,23 +1013,18 @@ function downloadArchiveItem(id) {
 ====================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Global JS initialized.");
+  console.log("Global JS initialized (Mock Mode for GitHub Pages).");
 
-  // Attach login form handler
   const loginForm = document.querySelector("form#loginForm");
   if (loginForm) loginForm.addEventListener("submit", handleLoginSubmit);
 
-  // Attach signup form handler
   const signupForm = document.querySelector("form#signupForm");
   if (signupForm) signupForm.addEventListener("submit", handleSignupSubmit);
 
-  // Attach signup/login handlers remain
-
-  // Initialize page-specific behaviors centralized in this file
   try {
-    initDashboardModals();
+    initDashboardCards();
   } catch (e) {
-    console.warn('initDashboardModals failed:', e);
+    console.warn('initDashboardCards failed:', e);
   }
 
   try {
@@ -630,7 +1045,6 @@ document.addEventListener("DOMContentLoaded", () => {
     console.warn('initOTPForm failed:', e);
   }
 
-  // Placeholder initialization
   updateDashboardStats();
   loadCalendarData();
   loadArchiveList();

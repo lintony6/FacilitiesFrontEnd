@@ -3,6 +3,72 @@
 ====================================== */
 
 const MOCK_DATA = {
+  emergencyStats: {
+    today: 3,
+    week: 12,
+    date: "2025-11-17",
+    week_start: "2025-11-11",
+    emergency_list: [
+      {
+        proposal: "WO-2025-1143",
+        description: "HVAC System Failure - Science Building",
+        location: "Science and Technology Building",
+        date: "2025-11-17",
+        status: "ASSIGNED"
+      },
+      {
+        proposal: "WO-2025-1144",
+        description: "Water Main Break - Parking Lot",
+        location: "Bull Street Garage",
+        date: "2025-11-17",
+        status: "WORK IN PROGRESS"
+      },
+      {
+        proposal: "WO-2025-1142",
+        description: "Power Outage - Library Wing",
+        location: "Thomas Cooper Library",
+        date: "2025-11-17",
+        status: "WORK DONE"
+      }
+    ]
+  },
+  priorities: [
+    {
+      description: "Annual HVAC inspection - All Buildings",
+      priority: "COORDINATED",
+      location: "Multiple Buildings",
+      scheduled_date: "2025-11-20",
+      proposal: "WO-2025-1100",
+      fullData: {
+        workOrderNumber: "WO-2025-1100",
+        priority: "COORDINATED",
+        status: "SCHEDULED",
+        building: "Campus-wide",
+        description: "Annual HVAC inspection - All Buildings",
+        assignedShop: "Temperature/HVAC",
+        scheduledDate: "2025-11-20",
+        estimatedDuration: "2 days"
+      }
+    },
+    {
+      description: "Fire safety system upgrade - Russell House",
+      priority: "URGENT",
+      location: "Russell House",
+      scheduled_date: "2025-11-22",
+      proposal: "WO-2025-1101",
+      fullData: {
+        workOrderNumber: "WO-2025-1101",
+        priority: "URGENT",
+        status: "SCHEDULED",
+        building: "Russell House",
+        description: "Fire safety system upgrade",
+        assignedShop: "Electrical & Lighting",
+        scheduledDate: "2025-11-22",
+        estimatedDuration: "1 week"
+      }
+    }
+  ],
+  chatHistory: [],
   keyIssues: [
     {
       title: "HVAC System Failure - Science Building",
@@ -263,6 +329,11 @@ async function apiRequest(url, method = "GET", body = null) {
           issues: MOCK_DATA.keyIssues,
           count: MOCK_DATA.keyIssues.length
         });
+      } else if (url.includes('/api/dashboard-priorities/')) {
+        resolve({
+          work_orders: MOCK_DATA.priorities,
+          count: MOCK_DATA.priorities.length
+        });
       } else if (url.includes('/api/dashboard-chat/')) {
         if (method === 'GET') {
           resolve({
@@ -461,6 +532,7 @@ function initDashboardCards() {
   // Data storage
   const data = {
     issues: MOCK_DATA.keyIssues,
+    emergencyStats: MOCK_DATA.emergencyStats,
     performance: [
       { title: 'Avg ticket resolution time', value: '2.3 hours', trend: '-15%' },
       { title: 'Work order completion rate', value: '94%', trend: '+3%' },
@@ -479,14 +551,7 @@ function initDashboardCards() {
       { title: 'Vendor response time', value: '3.2 hrs', trend: '-8%' },
       { title: 'Overtime hours', value: '45 hrs', trend: '-12%' },
     ],
-    priorities: [
-      { title: 'Annual HVAC inspection', status: 'In Progress', eta: '2 days' },
-      { title: 'Fire safety system upgrade', status: 'Scheduled', eta: '1 week' },
-      { title: 'Parking lot resurfacing', status: 'Not Started', eta: '2 weeks' },
-      { title: 'Building roof repairs', status: 'In Review', eta: '3 days' },
-      { title: 'Security system update', status: 'Pending Approval', eta: '5 days' },
-      { title: 'Elevator modernization project', status: 'Planning', eta: '1 month' },
-    ]
+    priorities: MOCK_DATA.priorities
   };
 
   // Load key issues on initialization
@@ -505,21 +570,355 @@ function initDashboardCards() {
       renderDetails('issues');
     }
   }
+  
+  // Load emergency stats
+  function loadEmergencyStats() {
+    console.log('[DEBUG] Loading emergency stats (mock data)...');
+    
+    const stats = data.emergencyStats;
+    if (stats) {
+      // Update emergency card count
+      const emergencyCardCount = document.getElementById('emergencyCardCount');
+      if (emergencyCardCount) {
+        emergencyCardCount.textContent = `${stats.today} + ${stats.week}`;
+      }
+    }
+  }
+  
+  // Load priorities
+  function loadPriorities() {
+    console.log('[DEBUG] Loading priorities (mock data)...');
+    
+    // Update the count in the card
+    const prioritiesCard = document.querySelector('[data-category="priorities"] .category-count');
+    if (prioritiesCard) {
+      prioritiesCard.textContent = data.priorities.length;
+    }
+  }
+  
+  // Load performance metrics
+  function loadPerformanceMetrics() {
+    console.log('[DEBUG] Loading performance metrics (mock data)...');
+    
+    // Update the count in the card
+    const perfCard = document.querySelector('[data-category="performance"] .category-count');
+    if (perfCard) {
+      perfCard.textContent = data.performance.length;
+    }
+    
+    // Render performance charts if container exists
+    const container = document.getElementById('performanceChartsContainer');
+    if (container) {
+      renderPerformanceCharts();
+    }
+  }
+  
+  // Render performance charts (mock version with complete data)
+  function renderPerformanceCharts() {
+    const container = document.getElementById('performanceChartsContainer');
+    if (!container) return;
+    
+    // Mock performance data matching Capstone structure
+    const perfData = {
+      avg_resolution_time: "2.3 hours",
+      avg_resolution_hours: 2.3,
+      completion_rate: "94%",
+      completion_percentage: 94,
+      emergency_response_time: "18 min",
+      emergency_response_minutes: 18,
+      backlog_count: 12,
+      total_orders: 247,
+      period_days: 7,
+      priority_distribution: [
+        { priority: "ROUTINE", count: 98, percentage: 39.7 },
+        { priority: "PROMPT ATTN", count: 52, percentage: 21.1 },
+        { priority: "URGENT", count: 38, percentage: 15.4 },
+        { priority: "COORDINATED", count: 32, percentage: 13.0 },
+        { priority: "EMERGENCY", count: 15, percentage: 6.1 },
+        { priority: "IN HOUSE CONSTR", count: 8, percentage: 3.2 },
+        { priority: "ADMINISTRATIVE", count: 4, percentage: 1.6 }
+      ],
+      top_buildings: [
+        { building: "103", building_name: "Thomas Cooper Library", count: 18 },
+        { building: "112", building_name: "Russell House", count: 15 },
+        { building: "085", building_name: "Science and Technology Building", count: 14 },
+        { building: "173", building_name: "Swearingen Engineering Center", count: 12 },
+        { building: "234", building_name: "Darla Moore School of Business", count: 11 },
+        { building: "138", building_name: "Blatt Physical Education Center", count: 10 },
+        { building: "100", building_name: "Coker Life Sciences", count: 9 },
+        { building: "158", building_name: "Colonial Life Arena", count: 8 },
+        { building: "051", building_name: "Gambrell Hall", count: 7 },
+        { building: "056", building_name: "Williams-Brice Building (Nursing)", count: 6 }
+      ],
+      top_crafts: [
+        { craft: "HVAC", count: 45 },
+        { craft: "Electrical & Lighting", count: 38 },
+        { craft: "Plumbing", count: 32 },
+        { craft: "Custodial", count: 28 },
+        { craft: "Carpentry & Building Repairs", count: 24 },
+        { craft: "Access Control", count: 18 },
+        { craft: "Grounds", count: 15 },
+        { craft: "Elevators & Escalators", count: 12 },
+        { craft: "Furniture & Appliances", count: 10 },
+        { craft: "Signage", count: 8 }
+      ],
+      trend_analysis: {
+        changes: {
+          total_orders: { current: 247, previous: 265, change_percent: -6.8 },
+          completion_rate: { current: 94, previous: 91, change_percent: 3.3 },
+          emergency_count: { current: 15, previous: 18, change_percent: -16.7 },
+          avg_resolution_hours: { current: 2.3, previous: 2.7, change_percent: -14.8 }
+        }
+      }
+    };
+    
+    const resolutionDays = perfData.avg_resolution_hours / 24;
+    const resolutionColor = resolutionDays < 2 ? '#4CAF50' : resolutionDays < 5 ? '#FF9800' : '#f44336';
+    const completionColor = perfData.completion_percentage < 20 ? '#f44336' : perfData.completion_percentage < 50 ? '#FF9800' : '#4CAF50';
+    const emergencyHours = perfData.emergency_response_minutes / 60;
+    const emergencyColor = emergencyHours < 4 ? '#4CAF50' : emergencyHours < 24 ? '#FF9800' : '#f44336';
+    const backlogColor = perfData.backlog_count < 50 ? '#4CAF50' : perfData.backlog_count < 150 ? '#FF9800' : '#f44336';
+    
+    let html = `
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h4 style="margin: 0;">Performance Overview</h4>
+        <select id="timePeriodSelect" style="padding: 5px 10px; font-size: 0.9rem; border-radius: 4px; border: 1px solid #ccc;">
+          <option value="1">Today</option>
+          <option value="7" selected>Last 7 Days</option>
+          <option value="30">Last 30 Days</option>
+        </select>
+      </div>
+      
+      <!-- Core Performance Metrics -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 25px;">
+        <div class="stat-card" style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <div style="font-size: 0.85rem; color: #666; margin-bottom: 5px;">Avg Resolution Time</div>
+          <div style="font-size: 1.8rem; font-weight: bold; color: ${resolutionColor}; margin-bottom: 5px;">${perfData.avg_resolution_time}</div>
+          <div style="font-size: 0.8rem; color: #999;">Based on ${perfData.total_orders} work orders</div>
+        </div>
+        <div class="stat-card" style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <div style="font-size: 0.85rem; color: #666; margin-bottom: 5px;">Completion Rate</div>
+          <div style="font-size: 1.8rem; font-weight: bold; color: ${completionColor}; margin-bottom: 5px;">${perfData.completion_rate}</div>
+          <div style="font-size: 0.8rem; color: #999;">Last ${perfData.period_days} days (${perfData.total_orders} orders)</div>
+        </div>
+        <div class="stat-card" style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <div style="font-size: 0.85rem; color: #666; margin-bottom: 5px;">Emergency Response</div>
+          <div style="font-size: 1.8rem; font-weight: bold; color: ${emergencyColor}; margin-bottom: 5px;">${perfData.emergency_response_time}</div>
+          <div style="font-size: 0.8rem; color: #999;">Avg time to start work</div>
+        </div>
+        <div class="stat-card" style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <div style="font-size: 0.85rem; color: #666; margin-bottom: 5px;">Maintenance Backlog</div>
+          <div style="font-size: 1.8rem; font-weight: bold; color: ${backlogColor}; margin-bottom: 5px;">${perfData.backlog_count}</div>
+          <div style="font-size: 0.8rem; color: #999;">Orders > 7 days old</div>
+        </div>
+      </div>
+      
+      <!-- Priority Distribution Chart -->
+      <div class="chart-section" style="margin-bottom: 25px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <h5>Priority Distribution</h5>
+        <div class="priority-bars">
+    `;
+    
+    perfData.priority_distribution.forEach(item => {
+      html += `
+        <div class="priority-bar-item" style="margin-bottom: 10px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+            <span style="font-weight: 500;">${item.priority}</span>
+            <span>${item.count} orders (${item.percentage}%)</span>
+          </div>
+          <div style="background: #e0e0e0; height: 20px; border-radius: 4px; overflow: hidden;">
+            <div style="background: linear-gradient(90deg, #4CAF50, #2196F3); height: 100%; width: ${item.percentage}%;"></div>
+          </div>
+        </div>
+      `;
+    });
+    
+    html += `
+        </div>
+      </div>
+      
+      <!-- Top Buildings and Crafts -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+        <div class="chart-section" style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <h5>Top 10 Buildings by Work Orders</h5>
+          <div class="top-list">
+    `;
+    
+    perfData.top_buildings.forEach((item, index) => {
+      html += `
+        <div class="top-item" style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;">
+          <span><strong>#${index + 1}</strong> ${item.building_name}</span>
+          <span style="color: #666;">${item.count} orders</span>
+        </div>
+      `;
+    });
+    
+    html += `
+          </div>
+        </div>
+        <div class="chart-section" style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <h5>Top 10 Craft/Shop Types</h5>
+          <div class="top-list">
+    `;
+    
+    perfData.top_crafts.forEach((item, index) => {
+      html += `
+        <div class="top-item" style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;">
+          <span><strong>#${index + 1}</strong> ${item.craft}</span>
+          <span style="color: #666;">${item.count} orders</span>
+        </div>
+      `;
+    });
+    
+    html += `
+          </div>
+        </div>
+      </div>
+      
+      <!-- Trend Analysis -->
+      <div class="chart-section" style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <h5>Trend Analysis (vs Previous Period)</h5>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+    `;
+    
+    const trends = perfData.trend_analysis.changes;
+    const trendLabels = {
+      'total_orders': 'Total Orders',
+      'completion_rate': 'Completion Rate',
+      'emergency_count': 'Emergency Count',
+      'avg_resolution_hours': 'Avg Resolution'
+    };
+    
+    for (const [key, trend] of Object.entries(trends)) {
+      let trendColor = '#666';
+      let changeText = '';
+      
+      if (Math.abs(trend.change_percent) < 0.1) {
+        changeText = 'No change';
+        trendColor = '#666';
+      } else if (key === 'completion_rate') {
+        if (trend.change_percent > 0) {
+          changeText = `+${trend.change_percent.toFixed(1)}% vs previous period`;
+          trendColor = '#4CAF50';
+        } else {
+          changeText = `${trend.change_percent.toFixed(1)}% vs previous period`;
+          trendColor = '#f44336';
+        }
+      } else if (key === 'avg_resolution_hours') {
+        if (trend.change_percent < 0) {
+          changeText = `${trend.change_percent.toFixed(1)}% (faster)`;
+          trendColor = '#4CAF50';
+        } else {
+          changeText = `+${trend.change_percent.toFixed(1)}% (slower)`;
+          trendColor = '#f44336';
+        }
+      } else {
+        if (trend.change_percent > 0) {
+          changeText = `+${trend.change_percent.toFixed(1)}% vs previous period`;
+        } else {
+          changeText = `${trend.change_percent.toFixed(1)}% vs previous period`;
+        }
+        trendColor = '#2196F3';
+      }
+      
+      html += `
+        <div class="trend-card" style="background: #f5f5f5; padding: 15px; border-radius: 8px; text-align: center;">
+          <div style="font-size: 0.85rem; color: #666; margin-bottom: 5px;">${trendLabels[key] || key}</div>
+          <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 5px;">
+            ${typeof trend.current === 'number' && !Number.isInteger(trend.current) ? trend.current.toFixed(1) : trend.current}
+          </div>
+          <div style="color: ${trendColor}; font-weight: 500; font-size: 0.85rem;">
+            ${changeText}
+          </div>
+        </div>
+      `;
+    }
+    
+    html += `
+        </div>
+      </div>
+    `;
+    
+    container.innerHTML = html;
+    
+    // Add event listener for time period selector
+    const selector = document.getElementById('timePeriodSelect');
+    if (selector) {
+      selector.addEventListener('change', (e) => {
+        alert('Time period changed to: ' + e.target.options[e.target.selectedIndex].text + '\n\n(Mock mode - data remains the same)');
+      });
+    }
+  }
 
   function renderDetails(category) {
     let html = '';
     
     if (category === 'issues') {
-      detailsTitle.textContent = 'Key Issues';
+      detailsTitle.textContent = 'Key Issues (Past 7 Days)';
       
       data.issues.forEach((item, index) => {
+        const priorityColor = 
+          item.priority === 'EMERGENCY' ? '#d32f2f' : 
+          item.priority === 'URGENT' ? '#f57c00' : 
+          item.priority === 'PROMPT' ? '#fbc02d' : '#666';
+        
         html += `
-          <div class="detail-item" data-issue-index="${index}" onclick="showWorkOrderDetails(${index})">
+          <div class="detail-item" data-issue-index="${index}" onclick="showWorkOrderDetails(${index})" style="cursor: pointer;">
             <div class="title">${item.title}</div>
-            <div class="info">${item.priority} • ${item.date} • WO# ${item.workOrderNumber}</div>
+            <div class="info">
+              <span style="color: ${priorityColor}; font-weight: 600;">${item.priority}</span> • 
+              ${item.date} • WO# ${item.workOrderNumber}
+            </div>
           </div>
         `;
       });
+    } else if (category === 'emergency') {
+      detailsTitle.textContent = 'Emergency Tickets';
+      
+      const stats = data.emergencyStats;
+      const todayCount = stats ? stats.today : '<span class="loading-spinner">Loading...</span>';
+      const weekCount = stats ? stats.week : '<span class="loading-spinner">Loading...</span>';
+      const todayDate = stats ? formatDate(stats.date) : '...';
+      const weekRange = stats ? `${formatDate(stats.week_start)} - ${formatDate(stats.date)}` : '...';
+      
+      html = `
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div class="detail-item" style="text-align: center; padding: 30px;">
+            <div class="title" style="font-size: 1.2rem; margin-bottom: 10px;">Today</div>
+            <div class="info" style="font-size: 2.5rem; font-weight: bold; color: #d32f2f;" id="emergencyTodayDetail">
+              ${todayCount}
+            </div>
+            <div style="font-size: 0.9rem; color: #666; margin-top: 10px;" id="todayDateDetail">${todayDate}</div>
+          </div>
+          <div class="detail-item" style="text-align: center; padding: 30px;">
+            <div class="title" style="font-size: 1.2rem; margin-bottom: 10px;">Past 7 Days</div>
+            <div class="info" style="font-size: 2.5rem; font-weight: bold; color: #d32f2f;" id="emergencyWeekDetail">
+              ${weekCount}
+            </div>
+            <div style="font-size: 0.9rem; color: #666; margin-top: 10px;" id="weekDateRangeDetail">${weekRange}</div>
+          </div>
+        </div>
+        <div style="margin-top: 20px; padding: 15px; background: #fff3e0; border-left: 4px solid #ff9800; border-radius: 4px;">
+          <strong>📊 Emergency Tickets:</strong> EMERGENCY priority work orders requiring immediate attention. 
+          Tracking today vs past 7 days to identify trends.
+        </div>
+      `;
+      
+      // Attach click handlers after rendering (use setTimeout to ensure DOM is ready)
+      setTimeout(() => {
+        const todayCard = document.querySelector('#emergencyTodayDetail')?.closest('.detail-item');
+        const weekCard = document.querySelector('#emergencyWeekDetail')?.closest('.detail-item');
+        
+        if (todayCard && stats) {
+          todayCard.style.cursor = 'pointer';
+          todayCard.onclick = () => showEmergencyList();
+        }
+        
+        if (weekCard && stats) {
+          weekCard.style.cursor = 'pointer';
+          weekCard.onclick = () => showEmergencyList();
+        }
+      }, 100);
     } else if (category === 'performance') {
       detailsTitle.textContent = 'Performance Metrics';
       data.performance.forEach(item => {
@@ -531,12 +930,22 @@ function initDashboardCards() {
         `;
       });
     } else if (category === 'priorities') {
-      detailsTitle.textContent = 'Current Priorities';
-      data.priorities.forEach(item => {
+      detailsTitle.textContent = 'Scheduled Priorities';
+      data.priorities.forEach((item, index) => {
+        const priorityColor = 
+          item.priority === 'EMERGENCY' ? '#d32f2f' : 
+          item.priority === 'URGENT' ? '#f57c00' : 
+          item.priority === 'COORDINATED' ? '#1976d2' : '#666';
+        
         html += `
-          <div class="detail-item">
-            <div class="title">${item.title}</div>
-            <div class="info">${item.status} • ETA: ${item.eta}</div>
+          <div class="detail-item" data-priority-index="${index}" onclick="showPriorityDetails(${index})" style="cursor: pointer;">
+            <div class="title">${item.description}</div>
+            <div class="info">
+              <span style="color: ${priorityColor}; font-weight: 600;">${item.priority}</span> • 
+              ${item.location} • 
+              <strong>Scheduled:</strong> ${item.scheduled_date} • 
+              WO# ${item.proposal}
+            </div>
           </div>
         `;
       });
@@ -561,8 +970,11 @@ function initDashboardCards() {
     renderDetails('issues');
   }
   
-  // Load key issues
+  // Load all data
   loadKeyIssues();
+  loadEmergencyStats();
+  loadPriorities();
+  loadPerformanceMetrics();
   
   // Make data accessible globally for modal
   window.dashboardData = data;
@@ -605,6 +1017,92 @@ function showWorkOrderDetails(index) {
   const closeBtn = modal.querySelector('.close-btn');
   
   jsonDisplay.textContent = JSON.stringify(fullData, null, 2);
+  modal.setAttribute('aria-hidden', 'false');
+  
+  closeBtn.onclick = () => {
+    modal.setAttribute('aria-hidden', 'true');
+  };
+  
+  modal.onclick = (e) => {
+    if (e.target === modal) {
+      modal.setAttribute('aria-hidden', 'true');
+    }
+  };
+  
+  const escHandler = (e) => {
+    if (e.key === 'Escape') {
+      modal.setAttribute('aria-hidden', 'true');
+      document.removeEventListener('keydown', escHandler);
+    }
+  };
+  document.addEventListener('keydown', escHandler);
+}
+
+// Show priority details in modal
+function showPriorityDetails(index) {
+  const data = window.dashboardData;
+  if (!data || !data.priorities || !data.priorities[index]) {
+    console.error('No priority data found for index:', index);
+    return;
+  }
+  
+  const priority = data.priorities[index];
+  const fullData = priority.fullData || priority;
+  
+  const modal = document.getElementById('workOrderModal');
+  const jsonDisplay = document.getElementById('workOrderJson');
+  const closeBtn = modal.querySelector('.close-btn');
+  
+  jsonDisplay.textContent = JSON.stringify(fullData, null, 2);
+  modal.setAttribute('aria-hidden', 'false');
+  
+  closeBtn.onclick = () => {
+    modal.setAttribute('aria-hidden', 'true');
+  };
+  
+  modal.onclick = (e) => {
+    if (e.target === modal) {
+      modal.setAttribute('aria-hidden', 'true');
+    }
+  };
+  
+  const escHandler = (e) => {
+    if (e.key === 'Escape') {
+      modal.setAttribute('aria-hidden', 'true');
+      document.removeEventListener('keydown', escHandler);
+    }
+  };
+  document.addEventListener('keydown', escHandler);
+}
+
+// Show all emergency tickets in a modal
+function showEmergencyList() {
+  const stats = MOCK_DATA.emergencyStats;
+  
+  if (!stats || !stats.emergency_list) {
+    alert('No emergency ticket data available');
+    return;
+  }
+  
+  const emergencyList = stats.emergency_list;
+  
+  const modal = document.getElementById('workOrderModal');
+  const jsonDisplay = document.getElementById('workOrderJson');
+  const closeBtn = modal.querySelector('.close-btn');
+  
+  const displayData = {
+    total_count: emergencyList.length,
+    date_range: `${stats.week_start} to ${stats.date}`,
+    emergency_tickets: emergencyList.map(ticket => ({
+      proposal: ticket.proposal,
+      description: ticket.description,
+      location: ticket.location,
+      date: ticket.date,
+      status: ticket.status
+    }))
+  };
+  
+  jsonDisplay.textContent = JSON.stringify(displayData, null, 2);
   modal.setAttribute('aria-hidden', 'false');
   
   closeBtn.onclick = () => {

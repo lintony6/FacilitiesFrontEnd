@@ -25,27 +25,27 @@
       <div class="quick-card" data-category="issues">
         <button class="category-btn">
           <div class="category-title">Key Issues</div>
-          <div class="category-count">6</div>
+          <div class="category-count">0</div>
           <div class="category-label">Total Items</div>
         </button>
       </div>
-      <div class="quick-card" data-category="performance">
+      <div class="quick-card" data-category="emergency">
         <button class="category-btn">
-          <div class="category-title">Performance</div>
-          <div class="category-count">16</div>
-          <div class="category-label">Total Items</div>
+          <div class="category-title">Emergency Tickets</div>
+          <div class="category-count" id="emergencyCardCount">0</div>
+          <div class="category-label">Today + This Week</div>
         </button>
       </div>
       <div class="quick-card" data-category="priorities">
         <button class="category-btn">
           <div class="category-title">Priorities</div>
-          <div class="category-count">8</div>
+          <div class="category-count">0</div>
           <div class="category-label">Total Items</div>
         </button>
       </div>
     </div>
 
-    <!-- Details Section (shows content based on selected card) -->
+    <!-- Details Section (shows content based on selected card) - Primary Focus -->
     <div class="details-section" id="detailsSection">
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <h3 id="detailsTitle">Key Issues</h3>
@@ -56,27 +56,12 @@
       </div>
     </div>
 
-    <div class="analytics" role="region" aria-label="Analytics Overview">
-      <h3>Analytics Overview</h3>
-      <div class="emergency-stats">
-        <div class="stat-card">
-          <div class="stat-label">Emergency Tickets Today</div>
-          <div class="stat-date" id="todayDate">
-            <span class="loading-spinner-small">...</span>
-          </div>
-          <div class="stat-value" id="emergencyToday">
-            <span class="loading-spinner">Loading...</span>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Emergency Tickets This Week</div>
-          <div class="stat-date" id="weekDateRange">
-            <span class="loading-spinner-small">...</span>
-          </div>
-          <div class="stat-value" id="emergencyWeek">
-            <span class="loading-spinner">Loading...</span>
-          </div>
-        </div>
+    <!-- Analytics/Performance Section - Big visual space -->
+    <div class="analytics" role="region" aria-label="Performance Metrics & Analytics">
+      <h3>Performance Metrics & Analytics</h3>
+      <div id="performanceChartsContainer">
+        <!-- Charts and visualizations will be rendered here -->
+        <div class="loading-spinner">Loading performance data...</div>
       </div>
     </div>
 
@@ -84,8 +69,11 @@
     <div class="ai-chat-section" role="region" aria-label="AI Assistant Chat">
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <h3>Ask AI About Metrics</h3>
-        <button id="clearChatBtn" class="clear-chat-btn">Clear Chat</button>
+        <button id="clearChatBtn" class="clear-chat-btn" title="Clear conversation history">Clear Chat</button>
       </div>
+      <p style="margin: 0 0 10px 0; font-size: 0.85rem; color: #666; font-style: italic;">
+        Tip: Look up specific issues by work order number (e.g., "Tell me about WO# 12-345678")
+      </p>
       <div class="chat-messages" id="chatMessages">
         <div class="chat-message ai-message">
           <strong>AI Assistant:</strong> Hi! I can help you analyze dashboard metrics. Ask me anything about your performance data.
@@ -96,20 +84,48 @@
         <button id="chatSendBtn" class="chat-send-btn">Send</button>
       </div>
     </div>
+  </div>
 
-    <!-- Work Order Details Modal -->
-    <div id="workOrderModal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modal-work-order-title">
-      <div class="modal-content work-order-modal">
-        <div class="modal-header">
-          <h2 id="modal-work-order-title">Work Order Details</h2>
-          <button class="close-btn" aria-label="Close Work Order Details">&times;</button>
-        </div>
-        <div class="modal-body">
-          <pre id="workOrderJson" class="json-display"></pre>
-        </div>
+  <!-- Work Order Details Modal -->
+  <div id="workOrderModal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modal-work-order-title">
+    <div class="modal-content work-order-modal">
+      <div class="modal-header">
+        <h2 id="modal-work-order-title">Work Order Details</h2>
+        <button class="close-btn" aria-label="Close Work Order Details">&times;</button>
+      </div>
+      <div class="modal-body">
+        <pre id="workOrderJson" class="json-display"></pre>
       </div>
     </div>
   </div>
+
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <a href="dashboard.html" class="nav-item active">
+      <img src="static/icons/home.png" alt="Dashboard Icon"> Dashboard
+    </a>
+    <a href="archives.html" class="nav-item">
+      <img src="static/icons/archive.png" alt="Archives Icon"> Archives
+    </a>
+    <a href="calendar.html" class="nav-item">
+      <img src="static/icons/calendar.png" alt="Calendar Icon"> Calendar
+    </a>
+    <a href="login.html" class="nav-item">
+      <img src="static/icons/logout.png" alt="Logout Icon"> Log Out
+    </a>
+  </div>
+
+  <script src="static/js/script.js"></script>
+  <script>
+    // Auto cache-bust JS file in development
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      const timestamp = new Date().getTime();
+      const lastScript = document.scripts[document.scripts.length - 2]; // Get the script.js element
+      lastScript.src = lastScript.src.split('?')[0] + '?v=' + timestamp;
+    }
+  </script>
+</body>
+</html>
 
   <!-- Bottom Navigation -->
   <div class="bottom-nav">

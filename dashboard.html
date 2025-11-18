@@ -126,31 +126,3 @@
   </script>
 </body>
 </html>
-
-  <!-- Bottom Navigation -->
-  <div class="bottom-nav">
-    <a href="dashboard.html" class="nav-item active">
-      <img src="static/icons/home.png" alt="Dashboard Icon"> Dashboard
-    </a>
-    <a href="archives.html" class="nav-item">
-      <img src="static/icons/archive.png" alt="Archives Icon"> Archives
-    </a>
-    <a href="calendar.html" class="nav-item">
-      <img src="static/icons/calendar.png" alt="Calendar Icon"> Calendar
-    </a>
-    <a href="login.html" class="nav-item">
-      <img src="static/icons/logout.png" alt="Logout Icon"> Log Out
-    </a>
-  </div>
-
-  <script src="static/js/script.js"></script>
-  <script>
-    // Auto cache-bust JS file in development
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      const timestamp = new Date().getTime();
-      const lastScript = document.scripts[document.scripts.length - 2]; // Get the script.js element
-      lastScript.src = lastScript.src.split('?')[0] + '?v=' + timestamp;
-    }
-  </script>
-</body>
-</html>

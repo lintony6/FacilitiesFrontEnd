@@ -613,6 +613,9 @@ function initDashboardCards() {
     }
   }
   
+  // Global variable to track selected distribution type
+  let selectedDistribution = 'priority';
+
   // Render performance charts (mock version with complete data)
   function renderPerformanceCharts() {
     const container = document.getElementById('performanceChartsContainer');
@@ -629,15 +632,25 @@ function initDashboardCards() {
       backlog_count: 12,
       total_orders: 247,
       period_days: 7,
-      priority_distribution: [
-        { priority: "ROUTINE", count: 98, percentage: 39.7 },
-        { priority: "PROMPT ATTN", count: 52, percentage: 21.1 },
-        { priority: "URGENT", count: 38, percentage: 15.4 },
-        { priority: "COORDINATED", count: 32, percentage: 13.0 },
-        { priority: "EMERGENCY", count: 15, percentage: 6.1 },
-        { priority: "IN HOUSE CONSTR", count: 8, percentage: 3.2 },
-        { priority: "ADMINISTRATIVE", count: 4, percentage: 1.6 }
-      ],
+      priCode_distribution: {
+        "ROUTINE": { count: 98, percentage: 39.7 },
+        "PROMPT ATTN": { count: 52, percentage: 21.1 },
+        "URGENT": { count: 38, percentage: 15.4 },
+        "COORDINATED": { count: 32, percentage: 13.0 },
+        "EMERGENCY": { count: 15, percentage: 6.1 },
+        "IN HOUSE CONSTR": { count: 8, percentage: 3.2 },
+        "ADMINISTRATIVE": { count: 4, percentage: 1.6 }
+      },
+      statusCode_distribution: {
+        "NEW": { count: 45, percentage: 18.2 },
+        "ASSIGNED": { count: 62, percentage: 25.1 },
+        "WORK IN PROGRESS": { count: 48, percentage: 19.4 },
+        "WORK DONE": { count: 38, percentage: 15.4 },
+        "SHOP DONE": { count: 28, percentage: 11.3 },
+        "COMPLETED": { count: 15, percentage: 6.1 },
+        "AWAITING VEND/PARTS": { count: 7, percentage: 2.8 },
+        "CANCELED": { count: 4, percentage: 1.6 }
+      },
       top_buildings: [
         { building: "103", building_name: "Thomas Cooper Library", count: 18 },
         { building: "112", building_name: "Russell House", count: 15 },
@@ -713,25 +726,64 @@ function initDashboardCards() {
         </div>
       </div>
       
-      <!-- Priority Distribution Chart -->
+      <!-- Distribution Chart with Toggle -->
       <div class="chart-section" style="margin-bottom: 25px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-        <h5>Priority Distribution</h5>
-        <div class="priority-bars">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <h5 style="margin: 0;">Work Order Distribution</h5>
+          <div style="display: inline-flex; background: #f5f5f5; border-radius: 4px; padding: 2px;">
+            <button id="priorityDistBtn" class="dist-toggle-btn ${selectedDistribution === 'priority' ? 'active' : ''}" style="padding: 6px 16px; border: none; background: ${selectedDistribution === 'priority' ? '#73000a' : 'transparent'}; color: ${selectedDistribution === 'priority' ? 'white' : '#666'}; border-radius: 3px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.2s;">Priority</button>
+            <button id="statusDistBtn" class="dist-toggle-btn ${selectedDistribution === 'status' ? 'active' : ''}" style="padding: 6px 16px; border: none; background: ${selectedDistribution === 'status' ? '#73000a' : 'transparent'}; color: ${selectedDistribution === 'status' ? 'white' : '#666'}; border-radius: 3px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.2s;">Status</button>
+          </div>
+        </div>
+        <div id="distributionContent" class="distribution-bars">
     `;
     
-    perfData.priority_distribution.forEach(item => {
-      html += `
-        <div class="priority-bar-item" style="margin-bottom: 10px;">
+    // Build priority distribution HTML
+    let priorityHTML = '';
+    for (const [priority, data] of Object.entries(perfData.priCode_distribution)) {
+      priorityHTML += `
+        <div class="bar-item" style="margin-bottom: 10px;">
           <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-            <span style="font-weight: 500;">${item.priority}</span>
-            <span>${item.count} orders (${item.percentage}%)</span>
+            <span style="font-weight: 500;">${priority}</span>
+            <span>${data.count} orders (${data.percentage}%)</span>
           </div>
           <div style="background: #e0e0e0; height: 20px; border-radius: 4px; overflow: hidden;">
-            <div style="background: linear-gradient(90deg, #4CAF50, #2196F3); height: 100%; width: ${item.percentage}%;"></div>
+            <div style="background: linear-gradient(90deg, #4CAF50, #2196F3); height: 100%; width: ${data.percentage}%;"></div>
           </div>
         </div>
       `;
-    });
+    }
+    
+    // Build status distribution HTML
+    let statusHTML = '';
+    for (const [status, data] of Object.entries(perfData.statusCode_distribution)) {
+      // Color code by status category
+      let statusColor = '#2196F3'; // Default blue
+      if (status === 'NEW' || status === 'ASSIGNED') {
+        statusColor = '#FF9800'; // Orange for new/assigned
+      } else if (status === 'WORK IN PROGRESS' || status === 'AWAITING VEND/PARTS') {
+        statusColor = '#FFC107'; // Amber for in progress
+      } else if (status === 'COMPLETED' || status === 'WORK DONE' || status === 'SHOP DONE') {
+        statusColor = '#4CAF50'; // Green for completed
+      } else if (status === 'CANCELED') {
+        statusColor = '#9E9E9E'; // Gray for canceled
+      }
+      
+      statusHTML += `
+        <div class="bar-item" style="margin-bottom: 10px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+            <span style="font-weight: 500;">${status}</span>
+            <span>${data.count} orders (${data.percentage}%)</span>
+          </div>
+          <div style="background: #e0e0e0; height: 20px; border-radius: 4px; overflow: hidden;">
+            <div style="background: ${statusColor}; height: 100%; width: ${data.percentage}%;"></div>
+          </div>
+        </div>
+      `;
+    }
+    
+    // Show the currently selected distribution
+    html += (selectedDistribution === 'status') ? statusHTML : priorityHTML;
     
     html += `
         </div>
@@ -848,6 +900,28 @@ function initDashboardCards() {
         alert('Time period changed to: ' + e.target.options[e.target.selectedIndex].text + '\n\n(Mock mode - data remains the same)');
       });
     }
+    
+    // Add event listeners for distribution toggle buttons
+    const priorityBtn = document.getElementById('priorityDistBtn');
+    const statusBtn = document.getElementById('statusDistBtn');
+    
+    if (priorityBtn) {
+      priorityBtn.addEventListener('click', () => {
+        if (selectedDistribution !== 'priority') {
+          selectedDistribution = 'priority';
+          renderPerformanceCharts(); // Re-render with priority selected
+        }
+      });
+    }
+    
+    if (statusBtn) {
+      statusBtn.addEventListener('click', () => {
+        if (selectedDistribution !== 'status') {
+          selectedDistribution = 'status';
+          renderPerformanceCharts(); // Re-render with status selected
+        }
+      });
+    }
   }
 
   function renderDetails(category) {
@@ -911,12 +985,12 @@ function initDashboardCards() {
         
         if (todayCard && stats) {
           todayCard.style.cursor = 'pointer';
-          todayCard.onclick = () => showEmergencyList();
+          todayCard.onclick = () => showEmergencyList('today');
         }
         
         if (weekCard && stats) {
           weekCard.style.cursor = 'pointer';
-          weekCard.onclick = () => showEmergencyList();
+          weekCard.onclick = () => showEmergencyList('week');
         }
       }, 100);
     } else if (category === 'performance') {
@@ -979,19 +1053,97 @@ function initDashboardCards() {
   // Make data accessible globally for modal
   window.dashboardData = data;
   
-  // Refresh button handler
+  // Refresh button handler - clears all dashboard data and reloads
   const refreshBtn = document.getElementById('refreshIssuesBtn');
   if (refreshBtn) {
     refreshBtn.addEventListener('click', async () => {
       refreshBtn.disabled = true;
       refreshBtn.textContent = 'Refreshing...';
       
-      // Simulate refresh with slight delay
-      setTimeout(() => {
-        alert('Data refreshed! (Mock data remains the same for demo)');
+      try {
+        // Clear all displayed data
+        console.log('[REFRESH] Clearing all dashboard data...');
+        
+        // Show loading state on all cards
+        const issuesCount = document.querySelector('[data-category="issues"] .category-count');
+        const emergencyCount = document.getElementById('emergencyCardCount');
+        const prioritiesCount = document.querySelector('[data-category="priorities"] .category-count');
+        const perfCount = document.querySelector('[data-category="performance"] .category-count');
+        
+        if (issuesCount) issuesCount.textContent = '...';
+        if (emergencyCount) emergencyCount.textContent = '...';
+        if (prioritiesCount) prioritiesCount.textContent = '...';
+        if (perfCount) perfCount.textContent = '...';
+        
+        // Clear details section with loading spinner
+        const detailsContainer = document.querySelector('.details-list');
+        if (detailsContainer) {
+          detailsContainer.innerHTML = `
+            <div style="text-align: center; padding: 40px;">
+              <div class="spinner" style="display: inline-block; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #73000a; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+              <p style="margin-top: 15px; color: #666;">Loading fresh data...</p>
+            </div>
+          `;
+        }
+        
+        // Clear performance charts with loading spinner
+        const perfContainer = document.getElementById('performanceChartsContainer');
+        if (perfContainer) {
+          perfContainer.innerHTML = `
+            <div style="text-align: center; padding: 40px;">
+              <div class="spinner" style="display: inline-block; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #73000a; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+              <p style="margin-top: 15px; color: #666;">Loading performance metrics...</p>
+            </div>
+          `;
+        }
+        
+        // Clear chat history (visual only, keeps session)
+        const chatMessages = document.getElementById('chatMessages');
+        if (chatMessages) {
+          chatMessages.innerHTML = `
+            <div class="chat-message ai-message">
+              <strong>AI Assistant:</strong> Chat refreshed! How can I help you analyze the latest data?
+            </div>
+          `;
+        }
+        
+        // Simulate API delay (800ms to show the spinner animation)
+        await new Promise(resolve => setTimeout(resolve, 800));
+        
+        // Reload all data fresh
+        console.log('[REFRESH] Reloading all data...');
+        await loadKeyIssues();
+        loadEmergencyStats();
+        loadPriorities();
+        loadPerformanceMetrics();
+        
+        // Small delay to ensure data is loaded
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        // Re-render the currently selected category
+        const selectedCard = document.querySelector('.quick-card.selected');
+        if (selectedCard) {
+          const category = selectedCard.getAttribute('data-category');
+          console.log('[REFRESH] Re-rendering category:', category);
+          renderDetails(category);
+        } else {
+          // If no card is selected, select issues by default
+          console.log('[REFRESH] No card selected, defaulting to issues');
+          const issuesCard = document.querySelector('[data-category="issues"]');
+          if (issuesCard) {
+            issuesCard.click();
+          }
+        }
+        
+        console.log('[REFRESH] Data refresh complete!');
+        
+      } catch (error) {
+        console.error('[REFRESH] Error refreshing data:', error);
+        alert('Error refreshing data. Please try again.');
+      } finally {
         refreshBtn.textContent = 'Refresh Data';
         refreshBtn.disabled = false;
-      }, 800);
+      }
     });
   }
 }
@@ -1076,7 +1228,7 @@ function showPriorityDetails(index) {
 }
 
 // Show all emergency tickets in a modal
-function showEmergencyList() {
+function showEmergencyList(period = 'week') {
   const stats = MOCK_DATA.emergencyStats;
   
   if (!stats || !stats.emergency_list) {
@@ -1084,16 +1236,29 @@ function showEmergencyList() {
     return;
   }
   
-  const emergencyList = stats.emergency_list;
+  // Filter based on period
+  let filteredList;
+  let dateRange;
+  
+  if (period === 'today') {
+    // Only show tickets from today
+    filteredList = stats.emergency_list.filter(ticket => ticket.date === stats.date);
+    dateRange = `Today (${stats.date})`;
+  } else {
+    // Show all tickets from the past week
+    filteredList = stats.emergency_list;
+    dateRange = `Past 7 Days (${stats.week_start} to ${stats.date})`;
+  }
   
   const modal = document.getElementById('workOrderModal');
   const jsonDisplay = document.getElementById('workOrderJson');
   const closeBtn = modal.querySelector('.close-btn');
   
   const displayData = {
-    total_count: emergencyList.length,
-    date_range: `${stats.week_start} to ${stats.date}`,
-    emergency_tickets: emergencyList.map(ticket => ({
+    period: period === 'today' ? 'Today Only' : 'Past 7 Days',
+    total_count: filteredList.length,
+    date_range: dateRange,
+    emergency_tickets: filteredList.map(ticket => ({
       proposal: ticket.proposal,
       description: ticket.description,
       location: ticket.location,
